@@ -1,0 +1,729 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.gallery {
+  padding: $section-pad;
+  background: var(--bg2);
+  transition: background 0.45s;
+
+  @include respond($bp-lg) { padding: $section-pad-md; }
+  @include respond($bp-md) { padding: $section-pad-sm; }
+}
+
+// ── Header ──────────────────────────────────
+.gallery__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  @include respond($bp-md) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.gallery__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+}
+
+.gallery__title {
+  @include section-title;
+  @include reveal-base;
+}
+
+.gallery__sub {
+  @include reveal-base;
+  font-family: $font-display;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  max-width: 520px;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+.gallery__cta-wrap { @include reveal-base; align-self: flex-end; }
+.gallery__cta { @include btn-ghost; }
+
+// ──────────────────────────────────────────────
+// BENTO GRID — 4 cols × 3 rows
+// ──────────────────────────────────────────────
+.gh-bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 220px 220px 220px;
+  grid-template-areas:
+    "feat feat p1   p2"
+    "feat feat p3   p4"
+    "p5   video video stat";
+  gap: 8px;
+  max-width: 1320px;
+  margin: 0 auto;
+
+  @include respond($bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 200px 200px 200px 200px;
+    grid-template-areas:
+      "feat feat p1"
+      "feat feat p2"
+      "p3   p4   p5"
+      "video video stat";
+  }
+
+  @include respond($bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+    grid-template-rows: 220px 220px 200px 200px 200px 200px;
+    grid-template-areas:
+      "feat  feat"
+      "p1    p2"
+      "p3    p4"
+      "p5    p6"
+      "video video"
+      "stat  stat";
+  }
+}
+
+// ── Tile base ───────────────────────────────
+.gh-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  background: var(--bg3);
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  transition: $t-fast;
+
+  @include reveal-base;
+
+  &:hover,
+  &:focus-visible {
+    .gh-tile__img    { transform: scale(1.06); filter: brightness(1) saturate(1.1); }
+    .gh-tile__overlay { opacity: 1; }
+    .gh-tile__view    { transform: translateX(0); opacity: 1; }
+  }
+
+  &:focus-visible { outline-offset: -2px; }
+}
+
+// Image inside a tile — unified warmth treatment lives in _mixins.scss
+.gh-tile__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s;
+  @include photo-warmth(0.88);
+}
+
+// Hover overlay
+.gh-tile__overlay {
+  position: absolute;
+  inset: 0;
+  padding: 1.2rem 1.3rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  background: linear-gradient(to top,
+    rgba(5, 10, 10, 0.88) 0%,
+    rgba(5, 10, 10, 0.20) 45%,
+    transparent 75%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.gh-tile__label {
+  font-family: $font-cinzel;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.gh-tile__view {
+  font-family: $font-cinzel;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  opacity: 0.9;
+  transform: translateX(-6px);
+  transition: transform 0.4s 0.05s, opacity 0.4s 0.05s;
+  flex-shrink: 0;
+}
+
+// Subtle "first impression" — large feature gets a permanent corner caption
+.gh-tile--feat {
+  .gh-tile__overlay {
+    opacity: 1;
+    background: linear-gradient(to top,
+      rgba(5, 10, 10, 0.55) 0%,
+      rgba(5, 10, 10, 0) 50%
+    );
+  }
+  &:hover .gh-tile__overlay {
+    background: linear-gradient(to top,
+      rgba(5, 10, 10, 0.85) 0%,
+      rgba(5, 10, 10, 0.20) 50%
+    );
+  }
+}
+
+// ── Video tile ──────────────────────────────
+.gh-tile--video {
+  background: #000;
+
+  &:hover {
+    .gh-tile__video    { transform: scale(1.04); }
+    .gh-tile__overlay--video { opacity: 1; }
+  }
+}
+
+.gh-tile__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  @include photo-warmth(0.92);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gh-tile__overlay--video {
+  opacity: 1; // always visible
+  background: linear-gradient(to top,
+    rgba(5, 10, 10, 0.78) 0%,
+    rgba(5, 10, 10, 0.18) 45%,
+    transparent 80%
+  );
+  align-items: flex-end;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+// Live "Now" pill — top-right of the video tile
+.gh-tile__live {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(5, 10, 10, 0.65);
+  border: 1px solid rgba(26, 216, 216, 0.55);
+  color: #fff;
+  font-family: $font-cinzel;
+  font-size: 0.55rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.gh-tile__live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff5d5d;
+  box-shadow: 0 0 8px #ff5d5d;
+  animation: ghLiveDot 1.6s ease-in-out infinite;
+}
+
+@keyframes ghLiveDot {
+  0%, 100% { opacity: 1; transform: scale(1);    }
+  50%      { opacity: 0.5; transform: scale(0.8); }
+}
+
+// ── Stat / CTA tile ─────────────────────────
+.gh-tile--stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.6rem 1.5rem 1.5rem;
+  background:
+    linear-gradient(135deg, var(--cyan-dim) 0%, transparent 60%),
+    var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: $t-fast, var(--t-theme);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%);
+    pointer-events: none;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(13, 148, 148, 0.18);
+
+    &::before { transform: scale(1.4) translate(-10px, 10px); }
+    .gh-tile__stat-cta { gap: 0.8rem; color: var(--cyan); }
+  }
+
+  // Override hover-overlay rules from the base tile
+  .gh-tile__img,
+  .gh-tile__overlay { display: none; }
+}
+
+.gh-tile__stat-num {
+  font-family: $font-display;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--cyan);
+  position: relative;
+  z-index: 1;
+}
+
+.gh-tile__stat-lbl {
+  font-family: $font-cinzel;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--heading);
+  margin-top: 0.6rem;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+.gh-tile__stat-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: $font-cinzel;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-top: 1rem;
+  transition: gap 0.3s, color 0.3s;
+  position: relative;
+  z-index: 1;
+
+  span:last-child { color: var(--cyan); }
+}
+
+// ──────────────────────────────────────────────
+// MARQUEE — slow horizontal scroll
+// ──────────────────────────────────────────────
+.gh-marquee {
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  // Soft fade on the edges so photos drift in/out gracefully
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+
+  @include reveal-base;
+
+  // Pause on hover so users can interact with a tile
+  &:hover .gh-marquee__track,
+  &:focus-within .gh-marquee__track { animation-play-state: paused; }
+}
+
+.gh-marquee__track {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  animation: ghMarquee 65s linear infinite;
+  will-change: transform;
+}
+
+@keyframes ghMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.gh-marquee__item {
+  position: relative;
+  flex-shrink: 0;
+  width: 220px;
+  height: 140px;
+  border: none;
+  padding: 0;
+  background: var(--bg3);
+  cursor: pointer;
+  overflow: hidden;
+  font-family: inherit;
+  color: inherit;
+  display: block;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s;
+    @include photo-warmth(0.85);
+  }
+
+  &:hover img,
+  &:focus-visible img {
+    transform: scale(1.08);
+    filter: brightness(1) saturate(1.12);
+  }
+
+  &:hover .gh-marquee__label,
+  &:focus-visible .gh-marquee__label { opacity: 1; transform: translateY(0); }
+
+  @include respond($bp-md) {
+    width: 170px;
+    height: 110px;
+  }
+}
+
+.gh-marquee__label {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0.7rem 0.8rem;
+  background: linear-gradient(to top,
+    rgba(5, 10, 10, 0.88) 0%,
+    transparent 100%
+  );
+  font-family: $font-cinzel;
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s, transform 0.35s;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-marquee__track { animation: none; }
+  .gh-tile__live-dot { animation: none; }
+  .gh-tile__img,
+  .gh-tile__video,
+  .gh-marquee__item img { transition: none; }
+}
+
+// ──────────────────────────────────────────────
+// THROUGH THE YEARS — editorial year-strip
+// ──────────────────────────────────────────────
+.gh-years {
+  margin: 3rem auto 0;
+  max-width: 1320px;
+}
+
+.gh-years__head {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-bottom: 1.4rem;
+  padding: 0 0.4rem;
+
+  @include respond($bp-md) { gap: 0.8rem; }
+}
+
+.gh-years__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  transition: background 0.45s;
+}
+
+.gh-years__title {
+  font-family: $font-cinzel;
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 600;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.gh-years__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+
+  @include respond($bp-lg) { grid-template-columns: repeat(2, 1fr); }
+  @include respond($bp-sm) { grid-template-columns: 1fr; }
+}
+
+.gh-year-wrap {
+  @include reveal-base;
+}
+
+.gh-year {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 130px;
+  padding: 1.1rem 1.3rem;
+  background: var(--bg3);
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $t-fast, var(--t-theme);
+  border: 1px solid transparent;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--cyan);
+    box-shadow: 0 12px 30px rgba(13, 130, 130, 0.18);
+
+    .gh-year__bg {
+      transform: scale(1.10);
+      filter: brightness(0.8) saturate(1.15);
+    }
+
+    .gh-year__veil {
+      background: linear-gradient(to top,
+        rgba(5, 10, 10, 0.92) 0%,
+        rgba(5, 10, 10, 0.45) 65%,
+        rgba(5, 10, 10, 0.20) 100%
+      );
+    }
+
+    .gh-year__arrow {
+      transform: translateX(4px);
+      opacity: 1;
+    }
+
+    .gh-year__num { color: var(--cyan); }
+  }
+
+  @include respond($bp-md) { height: 110px; padding: 1rem 1.1rem; }
+}
+
+.gh-year__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.62) saturate(0.92) contrast(1.04);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s;
+
+  [data-theme='light'] & { filter: brightness(0.68) saturate(0.85); }
+}
+
+.gh-year__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(5, 10, 10, 0.90) 0%,
+    rgba(5, 10, 10, 0.55) 55%,
+    rgba(5, 10, 10, 0.30) 100%
+  );
+  pointer-events: none;
+  transition: background 0.4s;
+
+  [data-theme='light'] & {
+    background: linear-gradient(to top,
+      rgba(6, 30, 28, 0.85) 0%,
+      rgba(6, 30, 28, 0.55) 55%,
+      rgba(6, 30, 28, 0.30) 100%
+    );
+  }
+}
+
+.gh-year__num {
+  position: relative;
+  z-index: 1;
+  font-family: $font-display;
+  font-size: 2.2rem;
+  font-weight: 300;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+  transition: color 0.3s;
+}
+
+.gh-year__tag {
+  position: relative;
+  z-index: 1;
+  font-family: $font-cinzel;
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.gh-year__arrow {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  right: 1.2rem;
+  font-family: $font-display;
+  font-size: 1.3rem;
+  color: var(--cyan);
+  opacity: 0.7;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-year__bg { transition: none; }
+}
+
+// ──────────────────────────────────────────────
+// LIGHTBOX (kept compatible with existing styles)
+// ──────────────────────────────────────────────
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: rgba(5, 10, 10, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  animation: lbFade 0.25s ease both;
+
+  @include respond($bp-md) { padding: 5rem 0.5rem 2rem; }
+}
+
+@keyframes lbFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: $t-fast;
+  display: grid;
+  place-items: center;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--cyan);
+    color: #050a0a;
+    border-color: var(--cyan);
+  }
+}
+
+.lightbox__nav {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: $t-fast;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--cyan);
+    color: #050a0a;
+    border-color: var(--cyan);
+  }
+
+  @include respond($bp-md) {
+    width: 44px; height: 44px;
+    font-size: 1.6rem;
+  }
+}
+
+.lightbox__nav--prev { margin-right: 1.5rem; }
+.lightbox__nav--next { margin-left: 1.5rem; }
+
+@include respond($bp-md) {
+  .lightbox__nav--prev { margin-right: 0.5rem; }
+  .lightbox__nav--next { margin-left: 0.5rem; }
+}
+
+.lightbox__figure {
+  max-width: min(90vw, 1100px);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  animation: lbZoom 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes lbZoom {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox__caption {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  font-family: $font-cinzel;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.lightbox__index {
+  font-family: $font-body;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--cyan);
+}

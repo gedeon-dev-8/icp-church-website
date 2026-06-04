@@ -1,0 +1,130 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// ──────────────────────────────────────────────────────────
+// EmptyState — borrows the Map offline aesthetic (faint
+// grid backdrop, a glowing card, a single calm message).
+// Use anywhere on the site where there's nothing to show.
+// ──────────────────────────────────────────────────────────
+.empty-state {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 4rem 1.5rem;
+  width: 100%;
+  min-height: 360px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 0;
+  overflow: hidden;
+  isolation: isolate;
+  transition: background 0.45s, border-color 0.45s;
+}
+
+.empty-state__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--border2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border2) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.empty-state__card {
+  position: relative;
+  z-index: 1;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 2rem 1.5rem;
+}
+
+.empty-state__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--cyan);
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 0.3rem;
+
+  .empty-state--error & {
+    color: var(--gold);
+    border-color: var(--gold-dim);
+  }
+}
+
+.empty-state__title {
+  font-family: $font-display;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--heading);
+  margin: 0;
+}
+
+.empty-state__desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  margin: 0;
+  max-width: 38ch;
+}
+
+.empty-state__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 0.6rem;
+}
+
+.empty-state__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.2rem;
+  font-family: $font-cinzel;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid var(--cyan);
+  background: transparent;
+  color: var(--cyan);
+  cursor: pointer;
+  text-decoration: none;
+  transition: $t-fast;
+
+  &--primary {
+    background: var(--cyan);
+    color: #050a0a;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--cyan-deep);
+      border-color: var(--cyan-deep);
+    }
+  }
+
+  &--ghost {
+    &:hover,
+    &:focus-visible {
+      background: var(--cyan-dim);
+      color: var(--heading);
+    }
+  }
+}

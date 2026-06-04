@@ -1,0 +1,191 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.events {
+  padding: $section-pad;
+  background: var(--bg2);
+  transition: background 0.45s;
+
+  @include respond($bp-lg) { padding: $section-pad-md; }
+  @include respond($bp-md) { padding: $section-pad-sm; }
+}
+
+.events__head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 4rem;
+
+  @include respond($bp-md) { margin-bottom: 2.5rem; }
+}
+
+.events__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+  justify-content: center;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+}
+
+.events__title {
+  @include section-title;
+  @include reveal-base;
+  margin-bottom: 1.2rem;
+}
+
+.events__sub {
+  @include reveal-base;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.events__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.event {
+  @include reveal-base;
+  display: grid;
+  // Was 3 columns (date / body / action); RSVP CTA removed → 2 columns.
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  padding: 2rem 2.4rem;
+  transition: $t-fast, var(--t-theme);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--cyan);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover {
+    border-color: var(--border);
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+
+    &::before { transform: scaleY(1); }
+  }
+
+  @include respond($bp-md) {
+    gap: 1.4rem;
+    padding: 1.4rem 1.4rem 1.6rem;
+  }
+}
+
+.event__date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  padding: 0.9rem 0.6rem;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  text-align: center;
+  flex-shrink: 0;
+  transition: var(--t-theme);
+}
+
+.event__day {
+  font-family: $font-cinzel;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.25rem;
+}
+
+.event__num {
+  font-family: $font-display;
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--heading);
+  transition: color 0.45s;
+}
+
+.event__month {
+  font-family: $font-cinzel;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 0.4rem;
+}
+
+.event__body { min-width: 0; }
+
+.event__badge {
+  display: inline-block;
+  font-family: $font-cinzel;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  padding: 0.32rem 0.7rem;
+  margin-bottom: 0.7rem;
+  border: 1px solid var(--border);
+}
+
+.event__title {
+  font-family: $font-display;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--heading);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  transition: color 0.45s;
+}
+
+.event__desc {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 0.9rem;
+  max-width: 620px;
+}
+
+.event__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+.event__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.event__meta-icon {
+  font-size: 0.95rem;
+  filter: grayscale(0.3);
+}
+
+// .event__action and .event__cta removed alongside the RSVP button.

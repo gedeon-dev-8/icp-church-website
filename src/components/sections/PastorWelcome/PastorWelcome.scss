@@ -1,0 +1,90 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.welcome {
+  padding: 7rem 5rem;
+  background: var(--bg);
+  transition: background 0.45s;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '"';
+    position: absolute;
+    top: -2rem;
+    left: 5%;
+    font-family: $font-display;
+    font-size: 22rem;
+    line-height: 1;
+    color: var(--q-char);
+    pointer-events: none;
+    user-select: none;
+    transition: color 0.45s;
+  }
+
+  @include respond($bp-lg) { padding: 5rem 3rem; }
+  @include respond($bp-md) { padding: 4rem 1.5rem; }
+}
+
+.welcome__inner {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.welcome__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+  justify-content: center;
+}
+
+.welcome__title {
+  @include section-title;
+  @include reveal-base;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  margin-bottom: 1.8rem;
+}
+
+.welcome__body {
+  @include reveal-base;
+  font-size: 1.05rem;
+  line-height: 1.95;
+  color: var(--text);
+  margin-bottom: 2.4rem;
+  font-weight: 300;
+
+  p { max-width: 640px; margin: 0 auto; }
+}
+
+.welcome__sign {
+  @include reveal-base;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.welcome__sign-line {
+  width: 60px;
+  height: 1px;
+  background: var(--cyan);
+  margin-bottom: 0.5rem;
+}
+
+.welcome__sign-name {
+  font-family: $font-display;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--heading);
+  transition: color 0.45s;
+}
+
+.welcome__sign-role {
+  font-family: $font-cinzel;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}

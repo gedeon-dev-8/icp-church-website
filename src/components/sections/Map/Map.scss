@@ -1,0 +1,338 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// ─────────────────────────────────────────────────────────────────
+// MAP — full-bleed Street-View embed of the church entrance.
+// One floating "Get Directions" pill is the only overlay chrome.
+// ─────────────────────────────────────────────────────────────────
+.map {
+  background: var(--bg);
+  transition: background 0.45s;
+  padding: 0;          // edge-to-edge
+  margin: 0;
+}
+
+.map__frame {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 480px;
+  max-height: 720px;
+  background: #000;
+  overflow: hidden;
+  @include reveal-base;
+
+  @include respond($bp-lg) { height: 60vh; min-height: 420px; }
+  @include respond($bp-md) { height: 56vh; min-height: 360px; }
+}
+
+.map__iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  // Street-View handles its own colour rendering — do NOT invert in
+  // dark mode, it produces a posterised mess.
+}
+
+// ── Floating "Get Directions" pill (top-right, won't block panorama) ──
+.map__pin {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem 0.6rem 0.7rem;
+  background: var(--cyan);
+  color: #050a0a;
+  font-family: $font-cinzel;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 10px 28px rgba(13, 148, 148, 0.45);
+  transition: $t-fast;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(13, 148, 148, 0.55);
+  }
+
+  @include respond($bp-md) {
+    top: 0.9rem;
+    right: 0.9rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.6rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+.map__pin-icon {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+// ──────────────────────────────────────────────────────────────────
+// OFFLINE FALLBACK — shown when navigator.onLine is false or the
+// embed iframe fails to load within IFRAME_TIMEOUT_MS. Static card
+// with the address so visitors aren't left looking at a blank box.
+// ──────────────────────────────────────────────────────────────────
+.map__offline {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.5rem;
+  background:
+    radial-gradient(ellipse at 30% 30%, var(--cyan-dim) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, var(--cyan-dim) 0%, transparent 60%),
+    var(--bg2);
+  text-align: center;
+  overflow: hidden;
+}
+
+// Subtle map-grid backdrop so the fallback still reads as "this is
+// the map area" without needing the actual tiles.
+.map__offline-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right,  var(--border2) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border2) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.55;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+
+.map__offline-card {
+  position: relative;
+  z-index: 1;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 1.5rem;
+}
+
+.map__offline-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--cyan);
+  display: grid;
+  place-items: center;
+  margin-bottom: 0.6rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  font-size: 1.5rem;
+
+  // Diagonal slash to communicate "offline / no connection" over the wifi glyph.
+  &::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 50%;
+    height: 2px;
+    background: currentColor;
+    transform: rotate(-35deg);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+}
+
+.map__offline-title {
+  font-family: $font-display;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--heading);
+  line-height: 1.25;
+  transition: color 0.45s;
+}
+
+.map__offline-desc {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  max-width: 380px;
+  margin: 0;
+}
+
+.map__offline-address {
+  font-family: $font-display;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--heading);
+  white-space: pre-line;
+  margin: 0.6rem 0 1rem;
+  padding: 0.9rem 1.4rem;
+  border-left: 2px solid var(--cyan);
+  background: var(--surface);
+  transition: color 0.45s, background 0.45s;
+}
+
+.map__offline-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid var(--ghost-border);
+  background: transparent;
+  color: var(--cyan);
+  font-family: $font-cinzel;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $t-fast;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--cyan);
+    color: #050a0a;
+    border-color: var(--cyan);
+  }
+
+  // The ↻ glyph spins gently on hover to suggest the action
+  span:last-child {
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover span:last-child,
+  &:focus-visible span:last-child {
+    transform: rotate(180deg);
+  }
+}
+
+// ──────────────────────────────────────────────────────────────────
+// Closing info strip — sits beneath the map iframe and acts as the
+// "how to reach us" footer for the home page (the dedicated Contact
+// section was removed).
+// ──────────────────────────────────────────────────────────────────
+.map__close {
+  background: var(--bg2);
+  padding: 3.5rem 5rem 3rem;
+  text-align: center;
+  border-top: 1px solid var(--border2);
+  transition: background 0.45s, border-color 0.45s;
+
+  @include reveal-base;
+
+  @include respond($bp-lg) { padding: 3rem 3rem 2.5rem; }
+  @include respond($bp-md) { padding: 2.4rem 1.5rem 2rem; }
+}
+
+.map__close-eyebrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.1rem;
+  font-family: $font-cinzel;
+  font-size: 0.66rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+  margin-bottom: 2.2rem;
+
+  @include respond($bp-md) {
+    font-size: 0.58rem;
+    gap: 0.6rem;
+    margin-bottom: 1.6rem;
+  }
+}
+
+.map__close-line {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--cyan);
+  flex-shrink: 0;
+}
+
+.map__close-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
+  gap: 2rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @include respond($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.map__close-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0 1rem;
+  position: relative;
+
+  // Subtle vertical dividers between the three cells (desktop only)
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 18%;
+    bottom: 18%;
+    right: 0;
+    width: 1px;
+    background: var(--border2);
+    transition: background 0.45s;
+
+    @include respond($bp-md) { display: none; }
+  }
+}
+
+.map__close-label {
+  font-family: $font-cinzel;
+  font-size: 0.56rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.map__close-value {
+  font-family: $font-display;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--heading);
+  white-space: pre-line;
+  text-align: center;
+  transition: color 0.3s;
+}
+
+.map__close-value--link {
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--cyan-deep);
+    border-bottom-color: currentColor;
+  }
+}

@@ -1,0 +1,188 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.testimonials {
+  padding: $section-pad;
+  background: var(--bg);
+  transition: background 0.45s;
+  position: relative;
+  overflow: hidden;
+
+  // Soft ambient cyan glows in the corners
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  &::before { top: -120px; left: -100px; }
+  &::after  { bottom: -150px; right: -120px; }
+
+  @include respond($bp-lg) { padding: $section-pad-md; }
+  @include respond($bp-md) { padding: $section-pad-sm; }
+}
+
+.testimonials__head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 4rem;
+  position: relative;
+  z-index: 1;
+
+  @include respond($bp-md) { margin-bottom: 3rem; }
+}
+
+.testimonials__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+  justify-content: center;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+}
+
+.testimonials__title {
+  @include section-title;
+  @include reveal-base;
+  margin-bottom: 1.2rem;
+}
+
+.testimonials__sub {
+  @include reveal-base;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+
+  @include respond($bp-lg) { grid-template-columns: 1fr 1fr; }
+  @include respond($bp-md) { grid-template-columns: 1fr; }
+}
+
+// ── Single testimonial card ──────────────────
+.testimonial {
+  position: relative;
+  padding: 2.4rem 2rem 1.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  transition: $t-fast, var(--t-theme);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @include reveal-base;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--cyan);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover {
+    border-color: var(--border);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow), 0 12px 36px rgba(13, 148, 148, 0.10);
+
+    &::before { width: 100%; }
+    .testimonial__quote-mark { color: var(--cyan); transform: scale(1.05) rotate(-2deg); }
+    .testimonial__avatar { background: var(--cyan); color: #050a0a; }
+  }
+}
+
+.testimonial__quote-mark {
+  position: absolute;
+  top: -0.5rem; left: 1.4rem;
+  font-family: $font-display;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--cyan-dim);
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  // Light theme keeps a slightly stronger mark
+  [data-theme='light'] & { color: rgba(13, 148, 148, 0.18); }
+}
+
+.testimonial__quote {
+  font-family: $font-display;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+
+  [data-theme='dark'] & { color: rgba(255, 255, 255, 0.88); }
+}
+
+.testimonial__attrib {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border2);
+  transition: border-color 0.45s;
+}
+
+.testimonial__avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--cyan);
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  display: grid;
+  place-items: center;
+  font-family: $font-display;
+  font-size: 1.2rem;
+  font-weight: 400;
+  flex-shrink: 0;
+  transition: $t-fast;
+}
+
+.testimonial__attrib-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.testimonial__name {
+  font-family: $font-cinzel;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--heading);
+  font-weight: 600;
+  transition: color 0.45s;
+}
+
+.testimonial__role {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-style: italic;
+}

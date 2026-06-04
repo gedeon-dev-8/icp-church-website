@@ -1,0 +1,176 @@
+// ─── Brand ────────────────────────────────────
+// Slightly softened cyan: less arcade-electric, more refined teal
+$cyan:       #1ad8d8;
+$cyan-deep:  #14b8b8;
+$cyan-darker:#0d9494;
+
+// Subtle gold whisper used in micro-accents only (never as primary)
+$gold:       #d4b682;
+
+// ─── Transitions ─────────────────────────────
+$t-theme: background 0.45s ease, color 0.45s ease,
+          border-color 0.45s ease, box-shadow 0.45s ease;
+$t-fast:  all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+$t-slow:  all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+
+// ─── Breakpoints ─────────────────────────────
+$bp-xl:   1280px;
+$bp-lg:   1100px;
+$bp-md:   768px;
+$bp-sm:   480px;
+
+// ─── Fonts ───────────────────────────────────
+$font-display: 'Cormorant Garamond', Georgia, serif;
+$font-cinzel:  'Cinzel', serif;
+$font-body:    'DM Sans', system-ui, sans-serif;
+
+// ─── Spacing ─────────────────────────────────
+$section-pad: 9rem 5rem;
+$section-pad-md: 6rem 3rem;
+$section-pad-sm: 5rem 1.5rem;
+
+// ─── CSS Custom Properties (theme tokens) ────
+:root {
+  --cyan:       #{$cyan};
+  --cyan-deep:  #{$cyan-deep};
+  --gold:       #{$gold};
+  --t-theme:    #{$t-theme};
+}
+
+// Dark theme (default) — slightly deeper backgrounds, softer headings
+[data-theme='dark'] {
+  --bg:           #050a0a;
+  --bg2:          #07100f;
+  --bg3:          #0a1716;
+  --bg4:          #0d1c1b;
+  --surface:      #0a1716;
+  --surface2:     #0d1c1b;
+  --text:         #b9d2d0;
+  --text-dim:     rgba(185, 210, 208, 0.55);
+  --heading:      #ecf8f7;
+  --border:       rgba(26, 216, 216, 0.14);
+  --border2:      rgba(26, 216, 216, 0.07);
+  --cyan-dim:     rgba(26, 216, 216, 0.10);
+  --gold-dim:     rgba(212, 182, 130, 0.10);
+  --shadow:       none;
+  --nav-bg:       rgba(5, 10, 10, 0.92);
+  --mob-bg:       rgba(5, 10, 10, 0.97);
+  --hero-grad:    linear-gradient(to bottom, #06100f 0%, #050a0a 60%, #030606 100%);
+  --hero-orb:     rgba(26, 216, 216, 0.07);
+  --frame-bg:     linear-gradient(135deg, #0b1e1e, #060f0f, #0d1e1e);
+  --cross-color:  rgba(26, 216, 216, 0.16);
+  --cross-text:   rgba(26, 216, 216, 0.22);
+  --ticker-text:  #050a0a;
+  --scripture-bg: #050a0a;
+  --q-char:       rgba(26, 216, 216, 0.04);
+  --input-bg:     rgba(26, 216, 216, 0.03);
+  --ghost-border: rgba(26, 216, 216, 0.32);
+  --toggle-bg:    #0a1716;
+  --toggle-br:    rgba(26, 216, 216, 0.22);
+  --svg-opacity:  0.07;
+  --cross-opacity:0.04;
+  --ticker-bg: #{$cyan};
+  --hero-ourStrory-cta-btn: #{$cyan};
+  --hero-ourStrory-cta-btn-border: #{$cyan};
+}
+
+// ─── Liturgical season tints ─────────────────
+// We never change the base palette — only the accent/gold pair. The
+// seasonal hint shows up wherever --cyan or --gold is used as an
+// accent (eyebrows, buttons, glyph highlights). This keeps the
+// church's identity through the year without redesigning every
+// section per season.
+//
+// Adjustments are intentionally subtle. The brand teal is still
+// recognisable; you just feel that the room has been re-dressed.
+[data-season='advent'] {
+  --cyan:       #7c5ad9;       /* Royal Advent purple */
+  --cyan-deep:  #5b3fb0;
+  --gold:       #d4b682;       /* unchanged — gold pairs well with purple */
+  --cyan-dim:   rgba(124, 90, 217, 0.12);
+  --gold-dim:   rgba(212, 182, 130, 0.14);
+}
+
+[data-season='christmas'] {
+  --cyan:       #c8a35a;       /* candlelight gold takes the accent role */
+  --cyan-deep:  #a07f3e;
+  --gold:       #f0d39a;       /* lighter highlight gold */
+  --cyan-dim:   rgba(200, 163, 90, 0.14);
+  --gold-dim:   rgba(240, 211, 154, 0.16);
+}
+
+[data-season='epiphany'] {
+  --cyan:       #1ad8d8;       /* base cyan — back to ordinary */
+  --cyan-deep:  #14b8b8;
+  --gold:       #e7c989;       /* slightly brighter gold for star-of-Bethlehem */
+  --cyan-dim:   rgba(26, 216, 216, 0.10);
+  --gold-dim:   rgba(231, 201, 137, 0.14);
+}
+
+[data-season='lent'] {
+  --cyan:       #884b6a;       /* muted plum — solemn, not bleak */
+  --cyan-deep:  #6a3a52;
+  --gold:       #b89d7a;       /* ashen gold */
+  --cyan-dim:   rgba(136, 75, 106, 0.12);
+  --gold-dim:   rgba(184, 157, 122, 0.10);
+}
+
+[data-season='easter'] {
+  --cyan:       #e7c989;       /* radiant gold takes the lead */
+  --cyan-deep:  #c2a05f;
+  --gold:       #f6e3b0;       /* lighter resurrection white-gold */
+  --cyan-dim:   rgba(231, 201, 137, 0.16);
+  --gold-dim:   rgba(246, 227, 176, 0.18);
+}
+
+[data-season='pentecost'] {
+  --cyan:       #d04a4a;       /* flame red of the Holy Spirit */
+  --cyan-deep:  #a83a3a;
+  --gold:       #f0c878;       /* warm gold spark */
+  --cyan-dim:   rgba(208, 74, 74, 0.12);
+  --gold-dim:   rgba(240, 200, 120, 0.14);
+}
+
+// 'ordinary' falls back to whatever the base theme set above; no
+// overrides needed — the brand teal lives most of the year.
+
+// Light theme — calmer, more readable
+//   • Replace pure-white surfaces with off-white so the eye doesn't fight glare.
+//   • Deepen body text for stronger contrast against pale backgrounds.
+//   • Tone down cyan tinting so the brand colour reads as accent, not wash.
+//   • Slightly warmer/greener neutrals (less clinical "Apple Store" white).
+[data-theme='light'] {
+  --bg:           #e7eeec;   /* ↓ from #f6faf9 — less glare */
+  --bg2:          #dde7e3;   /* ↓ slightly deeper for section variety */
+  --bg3:          #f0f4f2;   /* off-white, replaces pure #ffffff */
+  --bg4:          #e3ebe8;
+  --surface:      #f0f4f2;   /* off-white surface (was pure white) */
+  --surface2:     #e9efec;
+  --text:         #1c302e;   /* ↑ contrast — was #2d4a48 */
+  --text-dim:     rgba(28, 48, 46, 0.72);   /* ↑ visibility — was 0.62 */
+  --heading:      #061d1a;   /* ↑ contrast — was #0e2825 */
+  --border:       rgba(13, 130, 130, 0.22);
+  --border2:      rgba(13, 130, 130, 0.11);
+  --cyan-dim:     rgba(20, 184, 184, 0.10);
+  --gold-dim:     rgba(212, 182, 130, 0.18);
+  --shadow:       0 2px 22px rgba(15, 60, 60, 0.10);
+  --nav-bg:       rgba(231, 238, 236, 0.94);
+  --mob-bg:       rgba(231, 238, 236, 0.97);
+  --hero-grad:    linear-gradient(to bottom, #cadcd7 0%, #dae4e0 55%, #e7eeec 100%);
+  --hero-orb:     rgba(20, 184, 184, 0.09);
+  --frame-bg:     linear-gradient(135deg, #cfdfdb, #e6ede9, #d2e1dc);
+  --cross-color:  rgba(13, 130, 130, 0.20);
+  --cross-text:   rgba(13, 130, 130, 0.34);
+  --ticker-text:  #e7eeec;
+  --scripture-bg: #dde7e3;
+  --q-char:       rgba(13, 130, 130, 0.06);
+  --input-bg:     rgba(13, 130, 130, 0.05);
+  --ghost-border: rgba(13, 130, 130, 0.40);
+  --toggle-bg:    #dde7e3;
+  --toggle-br:    rgba(13, 130, 130, 0.28);
+  --svg-opacity:  0.11;
+  --cross-opacity:0.07;
+  --ticker-bg: #061d1a;
+  --hero-ourStrory-cta-btn: #061d1a;
+  --hero-ourStrory-cta-btn-border: #061d1a;
+}

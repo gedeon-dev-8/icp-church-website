@@ -1,0 +1,132 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.scripture {
+  padding: $section-pad;
+  background: var(--scripture-bg);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  transition: background 0.45s;
+
+  // background: linear-gradient(
+  //   135deg,
+  //   #020617 0%,
+  //   #0A1F44 55%,
+  //   #00F9F9 100%
+  // );
+
+  @include respond($bp-lg) { padding: $section-pad-md; }
+  @include respond($bp-md) { padding: $section-pad-sm; }
+
+  &::before {
+    content: '\201C';
+    position: absolute;
+    top: -3rem; left: 2rem;
+    font-family: $font-display;
+    font-size: 22rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--q-char);
+    pointer-events: none;
+    transition: color 0.45s;
+
+    @include respond($bp-md) { font-size: 12rem; }
+  }
+}
+
+.scripture__line {
+  display: block;
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--cyan), transparent);
+  margin: 0 auto 2.4rem;
+  @include reveal-base;
+}
+
+// ── Theme of the Year preamble ─────────────────────
+// Sits between the decorative line and the verse, framing the verse
+// as the foundation of this year's church theme.
+.scripture__theme {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 2.6rem;
+  @include reveal-base;
+}
+
+.scripture__theme-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: $font-cinzel;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+
+  &::before, &::after {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+}
+
+.scripture__theme-title {
+  font-family: $font-display;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  color: var(--heading);
+  transition: color 0.45s;
+}
+
+.scripture__text {
+  font-family: $font-display;
+  font-size: clamp(1.55rem, 3.2vw, 2.8rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--heading);
+  line-height: 1.5;
+  max-width: 880px;
+  margin: 0 auto 2rem;
+  position: relative;
+  z-index: 1;
+  transition: color 0.45s;
+  @include reveal-base;
+
+  // Both highlighted phrases ("fullness of joy" + "pleasures forevermore")
+  .word {
+    color: var(--cyan);
+    font-style: italic;
+    font-weight: 400;
+    text-shadow: 0 0 24px rgba(26, 216, 216, 0.30);
+  }
+
+  @include respond($bp-md) { font-size: clamp(1.4rem, 5vw, 2rem); }
+}
+
+.scripture__quote-mark {
+  font-family: $font-display;
+  color: var(--cyan);
+  opacity: 0.5;
+  margin: 0 0.05em;
+}
+
+.scripture__ref {
+  font-family: $font-cinzel;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  position: relative;
+  z-index: 1;
+  @include reveal-base;
+}

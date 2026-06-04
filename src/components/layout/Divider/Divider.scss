@@ -1,0 +1,33 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 2.2rem 1.5rem;
+  background: var(--bg);
+  transition: background 0.45s;
+
+  &__line {
+    flex: 0 1 120px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    transition: background 0.45s;
+  }
+
+  &__glyph {
+    color: var(--cyan);
+    font-size: 0.65rem;
+    font-family: $font-display;
+    opacity: 0.75;
+  }
+
+  // When sandwiched between two sections of the same color, this ornament
+  // sits cleanly. We use 'transparent' here so it inherits whichever
+  // surrounding section color is below it.
+  &.divider--between {
+    background: transparent;
+  }
+}

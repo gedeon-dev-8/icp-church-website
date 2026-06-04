@@ -1,0 +1,150 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Quiet diagonal stripe pattern for texture
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 80px,
+      rgba(26, 216, 216, 0.025) 80px,
+      rgba(26, 216, 216, 0.025) 81px
+    );
+    pointer-events: none;
+  }
+
+  // Soft ambient glow
+  &::after {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%);
+    pointer-events: none;
+    animation: plGlow 3s ease-in-out infinite alternate;
+  }
+
+  &--exiting {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes plGlow {
+  from { transform: scale(1);    opacity: 0.6; }
+  to   { transform: scale(1.08); opacity: 1;   }
+}
+
+.page-loader__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  animation: plFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  .page-loader--exiting & {
+    animation: plFadeOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+}
+
+@keyframes plFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes plFadeOut {
+  from { opacity: 1; transform: translateY(0);   }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+.page-loader__logo {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cyan);
+  box-shadow: 0 0 32px rgba(26, 216, 216, 0.45);
+  object-fit: cover;
+  animation: plLogoBreathe 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes plLogoBreathe {
+  from { box-shadow: 0 0 24px rgba(26, 216, 216, 0.30); transform: scale(1);    }
+  to   { box-shadow: 0 0 40px rgba(26, 216, 216, 0.65); transform: scale(1.04); }
+}
+
+.page-loader__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: $font-cinzel;
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+.page-loader__brand-mark {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.page-loader__brand-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--cyan);
+  transform-origin: left;
+  animation: plLine 0.9s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes plLine {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.page-loader__brand-full {
+  color: var(--text);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+
+  @include respond($bp-sm) { display: none; }
+}
+
+.page-loader__bar {
+  width: 200px;
+  height: 1px;
+  background: var(--border2);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-loader__bar-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, var(--cyan), transparent);
+  animation: plBar 1.4s ease-in-out infinite;
+}
+
+@keyframes plBar {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%);  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader { display: none; }
+}

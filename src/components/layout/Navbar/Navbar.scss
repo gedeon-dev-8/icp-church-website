@@ -1,0 +1,214 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 4rem;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &--scrolled {
+    background: var(--nav-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 4rem;
+    box-shadow: var(--shadow);
+
+    .nav__link{
+      font-weight: normal;
+    }
+  }
+
+  @include respond($bp-lg) {
+    padding: 1.4rem 2.5rem;
+    &--scrolled { padding: 0.9rem 2.5rem; }
+  }
+
+  @include respond($bp-md) {
+    padding: 1.1rem 1.5rem;
+    &--scrolled { padding: 1rem 1.5rem; }
+  }
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+}
+
+.nav__logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  // border: 1.5px solid var(--cyan);
+  object-fit: cover;
+  box-shadow: 0 0 14px rgba(26, 216, 216, 0.22);
+  transition: box-shadow 0.3s;
+
+  &:hover { box-shadow: 0 0 22px rgba(26, 216, 216, 0.40); }
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+
+  @include respond($bp-md) { display: none; }
+}
+
+.nav__link {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+  padding-bottom: 2px;
+  font-weight: 600;
+
+  // Once the nav becomes solid (scrolled state), use theme text color
+  .nav--scrolled & { color: var(--text); }
+
+  [data-theme='light'] & {
+    color: rgba(13, 43, 43, 0.85);
+  }
+
+  // ── Active section / page indicator ──
+  &--active {
+    color: var(--cyan);
+
+    &::after { transform: scaleX(1); }
+
+    .nav--scrolled & { color: var(--cyan); }
+    [data-theme='light'] & { color: var(--cyan-deep); }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: var(--cyan);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  &:hover {
+    color: var(--cyan);
+    &::after { transform: scaleX(1); }
+  }
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav__lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--ghost-border);
+  background: transparent;
+  cursor: pointer;
+  padding: 0.42rem 0.9rem;
+  font-family: $font-cinzel;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: $t-fast;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+
+  .nav__lang-opt {
+    transition: color 0.25s;
+    &.is-active { color: var(--cyan); }
+  }
+
+  .nav__lang-divider {
+    color: var(--text-dim);
+    opacity: 0.5;
+  }
+
+  @include respond($bp-md) { display: none; }
+}
+
+.nav__toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-br);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: $t-fast;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+    transform: rotate(20deg);
+  }
+}
+
+.nav__toggle-icon {
+  position: absolute;
+  transition: opacity 0.3s, transform 0.3s;
+  line-height: 1;
+
+  &--dark  { opacity: 1; transform: scale(1); }
+  &--light { opacity: 0; transform: scale(0.5); }
+
+  [data-theme='light'] & {
+    &--dark  { opacity: 0; transform: scale(0.5); }
+    &--light { opacity: 1; transform: scale(1); }
+  }
+}
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--cyan);
+    transition: $t-fast;
+    transform-origin: center;
+  }
+
+  &--open {
+    span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  }
+
+  @include respond($bp-md) { display: flex; }
+}

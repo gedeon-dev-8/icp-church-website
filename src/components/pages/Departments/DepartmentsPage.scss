@@ -1,0 +1,336 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.departments-page {
+  background: var(--bg);
+  transition: background 0.45s;
+}
+
+// ── Hero header ──────────────────────────────
+// Background photo sits in .dept-hero__veil and is darkened by a
+// gradient on the same element so titles & body text always read
+// in high contrast — same pattern as the home Hero.
+.dept-hero {
+  position: relative;
+  padding: 12rem 5rem 7rem;
+  overflow: hidden;
+  // Cyan radial accents act as a fallback if the photo fails to load.
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--cyan-dim) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, var(--cyan-dim) 0%, transparent 60%),
+    var(--bg2);
+  transition: background 0.45s;
+  border-bottom: 1px solid var(--border2);
+  isolation: isolate; // local stacking context so z-indexes stay scoped
+
+  // Thin cyan accent line across the top, sits above the veil.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--cyan), transparent);
+    opacity: 0.45;
+    z-index: 2;
+  }
+
+  @include respond($bp-lg) { padding: 10rem 3rem 5rem; }
+  @include respond($bp-md) { padding: 8rem 1.5rem 4rem; }
+}
+
+.dept-hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  // Triple stack (top → bottom):
+  //   1. Dark legibility gradient (the key to text contrast)
+  //   2. Subtle cyan glow for brand warmth
+  //   3. The actual hero photo, cover-fitted to the section
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 10, 10, 0.72) 0%,
+      rgba(5, 10, 10, 0.52) 35%,
+      rgba(5, 10, 10, 0.65) 70%,
+      rgba(5, 10, 10, 0.92) 100%
+    ),
+    radial-gradient(
+      ellipse at 50% 55%,
+      rgba(26, 216, 216, 0.12) 0%,
+      transparent 65%
+    ),
+    url('../../../assets/images/Hero-Images/1.png') center / cover no-repeat;
+}
+
+.dept-hero__inner {
+  position: relative;
+  z-index: 1; // sits above the veil so text isn't tinted
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dept-hero__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+  justify-content: center;
+  // Cyan-on-dark already reads well; no override needed.
+
+  &::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+}
+
+.dept-hero__title {
+  @include section-title;
+  @include reveal-base;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  margin-bottom: 1.5rem;
+  // Title now sits on a photo — lock to white-on-image regardless of
+  // the active theme so it stays readable in both light and dark.
+  color: #ffffff;
+  text-shadow:
+    0 2px 30px rgba(0, 0, 0, 0.55),
+    0 4px 14px rgba(0, 0, 0, 0.35);
+
+  em {
+    color: var(--cyan);
+    font-style: italic;
+    text-shadow: 0 0 36px rgba(26, 216, 216, 0.45);
+  }
+}
+
+.dept-hero__sub {
+  @include reveal-base;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+// ──────────────────────────────────────────────────────────────────
+// Department card grid — light, scannable, scales cleanly to 11
+// departments (3 cols desktop · 2 cols tablet · 1 col mobile).
+// Replaces the old alternating split-screen layout.
+// ──────────────────────────────────────────────────────────────────
+.dept-grid {
+  padding: 6rem 5rem;
+  background: var(--bg);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  max-width: 1240px;
+  margin: 0 auto;
+  transition: background 0.45s;
+
+  @include respond($bp-lg) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 4rem 3rem;
+    gap: 1.2rem;
+  }
+
+  @include respond($bp-md) {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.5rem;
+    gap: 1rem;
+  }
+}
+
+.dept-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.8rem 1.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  transition: $t-fast, var(--t-theme);
+  overflow: hidden;
+
+  @include reveal-base;
+
+  // Top-edge cyan accent that grows on hover
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--cyan);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover {
+    border-color: var(--border);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow), 0 10px 28px rgba(13, 148, 148, 0.08);
+
+    &::before { width: 100%; }
+    .dept-card__icon { transform: rotate(-4deg) scale(1.06); }
+  }
+}
+
+.dept-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 4px 12px rgba(13, 148, 148, 0.22));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  // SVGs are pre-coloured cyan in the source files — render them at the
+  // container's full size with object-fit so they crop cleanly.
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+.dept-card__title {
+  font-family: $font-cinzel;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--heading);
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 0.8rem;
+  transition: color 0.45s;
+}
+
+.dept-card__desc {
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 0 0 1.2rem;
+  flex: 1; // pushes the optional schedule strip to the bottom
+}
+
+.dept-card__schedule {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border2);
+  transition: border-color 0.45s;
+}
+
+.dept-card__schedule-label {
+  display: block;
+  font-family: $font-cinzel;
+  font-size: 0.55rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+}
+
+.dept-card__schedule-value {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text);
+  white-space: pre-line; // honors `\n` for multi-line schedules (Choir)
+}
+
+// ── Final CTA ──
+.dept-final {
+  padding: 7rem 5rem;
+  background: var(--bg2);
+  border-top: 1px solid var(--border2);
+  transition: background 0.45s, border-color 0.45s;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  &::before { top: -100px; left: -120px; }
+  &::after  { bottom: -120px; right: -100px; }
+
+  @include respond($bp-lg) { padding: 5rem 3rem; }
+  @include respond($bp-md) { padding: 4rem 1.5rem; }
+}
+
+.dept-final__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.dept-final__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+  justify-content: center;
+}
+
+.dept-final__title {
+  @include section-title;
+  @include reveal-base;
+  margin-bottom: 1.4rem;
+
+  em { font-style: italic; color: var(--cyan); }
+}
+
+.dept-final__sub {
+  @include reveal-base;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--text-dim);
+  margin-bottom: 2.4rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dept-final__cta {
+  @include reveal-base;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.dept-final__btn {
+  &--primary { @include btn-primary; }
+
+  // Ghost variant — overridden because the default `@include btn-ghost`
+  // (transparent bg + cyan text + faint border) gets lost against the
+  // cyan-tinted background of .dept-final. We bump the border weight,
+  // give it a solid surface fill, and use a darker cyan for the text.
+  &--ghost {
+    @include btn-ghost;
+
+    background: var(--surface);
+    border: 1.5px solid var(--cyan);
+    color: var(--heading);
+    font-weight: 700;
+    box-shadow: 0 2px 14px rgba(13, 130, 130, 0.10);
+
+    // Keep the label aligned with the primary CTA so the pair reads as a set
+    &:hover,
+    &:focus-visible {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: #050a0a;
+      box-shadow: 0 6px 22px rgba(13, 130, 130, 0.28);
+    }
+  }
+}

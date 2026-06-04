@@ -1,0 +1,38 @@
+@use '../../../styles/variables' as *;
+
+.ticker {
+  background: var(--ticker-bg);
+  // background: #0b1515; //#0d2b2b
+  padding: 0.85rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.ticker__inner {
+  display: inline-flex;
+  animation: tickerRoll 28s linear infinite;
+}
+
+@keyframes tickerRoll {
+  to { transform: translateX(-50%); }
+}
+
+.ticker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0 2.5rem;
+  font-family: $font-cinzel;
+  font-size: 0.67rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ticker-text);
+  font-weight: 600;
+
+  &::after {
+    content: '✦';
+    font-size: 0.45rem;
+    flex-shrink: 0;
+  }
+}

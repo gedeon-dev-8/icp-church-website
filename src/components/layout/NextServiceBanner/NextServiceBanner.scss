@@ -1,0 +1,159 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// ──────────────────────────────────────────────────────────
+// Next-Service banner — slides down from above the Navbar
+// when we enter the second half of the week. Quiet by
+// default; intensifies as service approaches.
+// ──────────────────────────────────────────────────────────
+.nsb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 600; // above Navbar (500)
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 1.4rem;
+  background: var(--nav-bg);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  animation: nsbSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: background 0.45s, border-color 0.45s;
+
+  // Push the body content down so the banner doesn't cover the hero.
+  // We use a sibling-margin pattern via JS-free CSS: the banner is
+  // fixed, so we don't need to push body. The Navbar itself sits
+  // below z-index 600, but visually it'll appear under us; we use a
+  // ~3.2rem banner height so the Navbar tucks beneath cleanly on
+  // most layouts. If overlap becomes a problem, add scroll-margin or
+  // bump Navbar's top in CSS.
+
+  @include respond($bp-md) {
+    padding: 0.6rem 1rem;
+    gap: 0.7rem;
+  }
+}
+
+@keyframes nsbSlideIn {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.nsb__icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border-radius: 50%;
+  font-size: 0.85rem;
+
+  .nsb--live & { color: var(--gold); background: var(--gold-dim); }
+}
+
+.nsb__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  min-width: 0;
+  flex: 1;
+}
+
+.nsb__title {
+  font-family: $font-cinzel;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--cyan);
+
+  .nsb--live & { color: var(--gold); }
+}
+
+.nsb__time {
+  font-family: $font-display;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--heading);
+  margin-top: 0.15rem;
+
+  @include respond($bp-md) { font-size: 0.9rem; }
+}
+
+.nsb__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  font-family: $font-cinzel;
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid var(--cyan);
+  background: transparent;
+  color: var(--cyan);
+  text-decoration: none;
+  transition: $t-fast;
+  flex-shrink: 0;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--cyan);
+    color: #050a0a;
+  }
+
+  @include respond($bp-md) {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+
+    // On phone we hide the arrow and shorten copy slot
+    span:last-child { display: none; }
+  }
+
+  @include respond($bp-sm) {
+    display: none; // hand back room to the dismiss + text on small screens
+  }
+}
+
+.nsb__dismiss {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: $t-fast;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--heading);
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+}
+
+// Pulse the live state subtly to communicate urgency.
+.nsb--live {
+  border-bottom-color: var(--gold);
+  .nsb__title::after {
+    content: ' · ';
+    color: var(--gold);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nsb { animation: none; }
+}

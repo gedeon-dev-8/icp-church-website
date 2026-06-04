@@ -1,0 +1,165 @@
+@use 'variables' as *;
+
+// ─── Respond to breakpoint ────────────────────
+@mixin respond($bp) {
+  @media (max-width: $bp) { @content; }
+}
+
+// ─── Eyebrow label ────────────────────────────
+@mixin eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: $font-cinzel;
+  font-size: 0.63rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  //color: var(--cyan);
+  margin-bottom: 1rem;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+}
+
+// ─── Section title ────────────────────────────
+@mixin section-title {
+  font-family: $font-display;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--heading);
+  transition: color 0.45s;
+
+  em {
+    font-style: italic;
+    color: var(--cyan);
+  }
+}
+
+// ─── Reveal animation ─────────────────────────
+@mixin reveal-base {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── Button: Primary ─────────────────────────
+@mixin btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--cyan);
+  color: #060b0b;
+  font-family: $font-cinzel;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 1rem 2.2rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: $t-fast;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: translateX(-101%);
+    transition: transform 0.35s;
+  }
+
+  &:hover::before { transform: translateX(0); }
+  &:hover { box-shadow: 0 0 30px rgba(26, 216, 216, 0.30); }
+
+  span { position: relative; z-index: 1; }
+}
+
+// ─── Unified photo treatment ──────────────────
+// One filter + one vignette wrapper rule so wildly different camera
+// sources across the gallery feel like a single church voice. Apply
+// the filter to the <img>/<video>; apply the vignette to its visible
+// container.
+@mixin photo-warmth($brightness: 0.9) {
+  filter:
+    brightness(#{$brightness})
+    saturate(1.08)
+    contrast(1.02)
+    sepia(0.06);
+
+  [data-theme='light'] & {
+    filter:
+      brightness(#{$brightness + 0.05})
+      saturate(1.04)
+      contrast(1.0)
+      sepia(0.04);
+  }
+}
+
+@mixin photo-vignette {
+  // Soft inner shadow + faint warm overlay through ::after.
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.32);
+    background:
+      radial-gradient(
+        ellipse at center,
+        transparent 55%,
+        rgba(10, 6, 4, 0.18) 100%
+      );
+    z-index: 2;
+    transition: opacity 0.4s;
+  }
+
+  [data-theme='light'] &::after {
+    box-shadow: inset 0 0 60px rgba(40, 28, 12, 0.18);
+    background:
+      radial-gradient(
+        ellipse at center,
+        transparent 55%,
+        rgba(40, 28, 12, 0.10) 100%
+      );
+  }
+}
+
+// ─── Button: Ghost ────────────────────────────
+@mixin btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid var(--ghost-border);
+  color: var(--cyan);
+  text-decoration: none;
+  font-family: $font-cinzel;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 1rem 2.2rem;
+  transition: $t-fast;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--cyan-dim);
+    border-color: var(--cyan);
+  }
+}

@@ -1,0 +1,126 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 490;
+  background: var(--mob-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 6rem 2rem 8rem;
+  overflow-y: auto;
+
+  &--open { transform: translateX(0); }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+  }
+}
+
+.mobile-menu__link {
+  font-family: $font-display;
+  font-size: 2.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--heading);
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--cyan);
+    transition: width 0.35s;
+  }
+
+  &:hover {
+    color: var(--cyan);
+    transform: translateX(8px);
+    &::after { width: 100%; }
+  }
+
+  &--active {
+    color: var(--cyan);
+    &::after { width: 100%; }
+  }
+
+  @include respond($bp-sm) { font-size: 1.9rem; }
+}
+
+.mobile-menu__controls {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.mobile-menu__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--ghost-border);
+  color: var(--text);
+  font-family: $font-cinzel;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  transition: $t-fast;
+
+  span.is-active { color: var(--cyan); }
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+
+  &--theme {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1rem;
+  }
+}
+
+.mobile-menu__footer {
+  position: absolute;
+  bottom: 3rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.mobile-menu__social {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.3s;
+
+  &:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+}

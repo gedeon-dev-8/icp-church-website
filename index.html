@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#060b0b" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f4fbfb" media="(prefers-color-scheme: light)" />
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- Primary meta -->
+  <title>ICP — International Church of Pretoria | A Family of Believers</title>
+  <meta name="description"
+    content="The International Church of Pretoria (ICP) — a welcoming family of believers from across Africa, united around the Word of God. Join us on Sundays for worship, prayer, and fellowship in Pretoria Central." />
+  <meta name="keywords"
+    content="church Pretoria, International Church of Pretoria, ICP, Sunday service Pretoria, Christian church Pretoria CBD, worship Pretoria, Bible study, fellowship" />
+  <meta name="author" content="International Church of Pretoria" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://icpretoria.org/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="International Church of Pretoria" />
+  <meta property="og:title" content="ICP — International Church of Pretoria" />
+  <meta property="og:description"
+    content="A family of believers from across Africa, united around one truth — the Word of God. Join us as we worship, grow, and serve together." />
+  <meta property="og:url" content="https://icpretoria.org/" />
+  <meta property="og:locale" content="en_ZA" />
+  <!-- Link-preview image. The rasterised JPG is the primary; older
+       scrapers (Facebook, some chat apps) prefer raster. The SVG is
+       declared as a secondary asset for crawlers that respect vector.
+       Both files are generated from public/og-image.svg — `npm run og`
+       regenerates them, and `npm run build` does it automatically. -->
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="International Church of Pretoria — established 1993, Sundays 09:00" />
+  <meta property="og:image" content="/og-image.svg" />
+  <meta property="og:image:type" content="image/svg+xml" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ICP — International Church of Pretoria" />
+  <meta name="twitter:description"
+    content="A welcoming spiritual home for all Christians in Pretoria. Join us Sunday." />
+  <meta name="twitter:image" content="/og-image.jpg" />
+  <meta name="twitter:image:alt" content="International Church of Pretoria — established 1993, Sundays 09:00" />
+
+  <!-- Favicons — every file lives under /public/favicon/, which Vite
+       serves at /favicon/<file>. The %PUBLIC_URL% token is a
+       Create-React-App convention that Vite does NOT substitute, so
+       all paths below are written absolute. -->
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="ICP" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+
+  <!-- Performance: preconnect to Google Fonts (used in global.scss) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Structured data: Church + LocalBusiness -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Church",
+      "name": "International Church of Pretoria",
+      "alternateName": "ICP",
+      "url": "https://icpretoria.org/",
+      "description": "A welcoming family of believers from across Africa, united around the Word of God.",
+      "foundingDate": "1993-11-21",
+      "founder": {
+        "@type": "Person",
+        "name": "Reverend Pastor Emmanuel Tshilenga Kabala"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "294 Flowers Street",
+        "addressLocality": "Capital Park, Pretoria",
+        "postalCode": "0084",
+        "addressCountry": "ZA"
+      },
+      "email": "info@icpretoria.org",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "07:30",
+          "closes": "12:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Wednesday",
+          "opens": "18:30",
+          "closes": "20:30"
+        }
+      ]
+    }
+    </script>
+
+  <!-- ─── Google Analytics 4 ───────────────────────────────────────
+       Measurement ID lives in VITE_GA_MEASUREMENT_ID (.env). The
+       Vite plugin substitutes %VITE_GA_MEASUREMENT_ID% at build time.
+       When the value is empty (e.g. local dev or preview branches),
+       the bootstrap below short-circuits and never loads gtag.js —
+       so analytics stays opt-in via env.
+
+       Get your G-XXXXXXXXXX ID at https://analytics.google.com →
+       Admin → Data Streams → your web stream.
+  ──────────────────────────────────────────────────────────────── -->
+  <script>
+    window.__GA_ID__ = "%VITE_GA_MEASUREMENT_ID%";
+    // Vite leaves the placeholder verbatim when the env var is unset,
+    // so we treat the literal "%VITE_GA_MEASUREMENT_ID%" string as
+    // "no ID configured" and skip the gtag bootstrap entirely.
+    if (window.__GA_ID__ && window.__GA_ID__.indexOf("VITE_") === -1) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.__GA_ID__;
+      document.head.appendChild(s);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      // send_page_view is left ON for the initial load; React Router
+      // navigations are tracked manually via the RouteScrollManager.
+      window.gtag('config', window.__GA_ID__, {
+        anonymize_ip: true
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="root"></div>
+
+  <!-- Graceful fallback for visitors with JavaScript disabled. The
+         core address/contact info is exposed so we never leave them
+         with a blank page. -->
+  <noscript>
+    <div
+      style="max-width: 640px; margin: 6rem auto; padding: 2rem; font-family: system-ui, sans-serif; line-height: 1.6; color: #1a3331;">
+      <h1
+        style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: 2rem; margin: 0 0 1rem;">
+        International Church of Pretoria
+      </h1>
+      <p>Our site needs JavaScript to render. In the meantime, here's where to find us:</p>
+      <p>
+        <strong>Sundays · 09:00</strong><br />
+        294 Flowers Street, Capital Park, Pretoria, 0084<br />
+        <a href="mailto:info@icpretoria.org">info@icpretoria.org</a>
+      </p>
+      <p>Please enable JavaScript and reload, or visit us in person — we'd love to see you.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>

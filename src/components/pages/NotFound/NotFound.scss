@@ -1,0 +1,59 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.not-found {
+  background: var(--bg);
+  transition: background 0.45s;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.not-found__hero {
+  padding: 11rem 5rem 3rem;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--cyan-dim) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, var(--gold-dim) 0%, transparent 55%),
+    var(--bg);
+  border-bottom: 1px solid var(--border2);
+  transition: background 0.45s, border-color 0.45s;
+
+  @include respond($bp-lg) { padding: 9rem 3rem 2.5rem; }
+  @include respond($bp-md) { padding: 7rem 1.5rem 2rem; }
+}
+
+.not-found__eyebrow {
+  @include eyebrow;
+  justify-content: center;
+}
+
+.not-found__title {
+  @include section-title;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  max-width: 800px;
+  margin: 0 auto 1.4rem;
+
+  em { color: var(--cyan); font-style: italic; }
+}
+
+.not-found__sub {
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.not-found__body {
+  padding: 4rem 5rem 6rem;
+  display: flex;
+  justify-content: center;
+
+  @include respond($bp-lg) { padding: 3rem 3rem 5rem; }
+  @include respond($bp-md) { padding: 2rem 1rem 4rem; }
+
+  .empty-state {
+    max-width: 720px;
+  }
+}

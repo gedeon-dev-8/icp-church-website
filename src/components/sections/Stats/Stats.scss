@@ -1,0 +1,123 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// ──────────────────────────────────────────────────────────
+// Stats — a quiet, monumental row of headline numbers.
+// Sits between About and Announcement on Home.
+// ──────────────────────────────────────────────────────────
+.stats {
+  padding: 5rem 5rem;
+  background: var(--bg);
+  border-top: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+  transition: background 0.45s, border-color 0.45s;
+
+  @include respond($bp-lg) { padding: 4rem 3rem; }
+  @include respond($bp-md) { padding: 3rem 1.5rem; }
+}
+
+.stats__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+
+  @include respond($bp-lg) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 1.5rem;
+  }
+
+  @include respond($bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stats__cell {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  @include reveal-base;
+
+  // A whisper of cyan-to-gold backdrop on hover — keeps the band quiet
+  // by default but rewards exploration.
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -0.6rem -0.4rem;
+    background: radial-gradient(
+      ellipse at center,
+      var(--cyan-dim) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:hover::before { opacity: 1; }
+
+  > * { position: relative; z-index: 1; }
+}
+
+.stats__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  font-size: 1.15rem;
+  margin-bottom: 0.3rem;
+
+  // One cell in four gets the gold accent — for visual rhythm.
+  .stats__cell:nth-child(4n) & {
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+}
+
+.stats__num {
+  font-family: $font-display;
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--heading);
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.stats__num-suffix {
+  font-size: 0.55em;
+  color: var(--cyan);
+  margin-left: 0.1em;
+  line-height: 1;
+  transform: translateY(0.15em);
+}
+
+.stats__label {
+  font-family: $font-cinzel;
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+// Small secondary line under the main label — used to surface
+// secondary stats like "5+ years streaming online".
+.stats__sublabel {
+  font-family: $font-body;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
