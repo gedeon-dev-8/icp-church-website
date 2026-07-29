@@ -97,7 +97,7 @@ const en = {
     next: {
       kicker: 'Next Gathering',
       service: 'Sunday Service',
-      time: 'Sundays · 11:00',
+      time: 'Sundays · 11:00 AM',
       separator: '·',
       live: 'Happening now',
       starting: 'Starting in moments',
@@ -414,7 +414,7 @@ const en = {
     // old Contact section as the site's "how to reach us" footer.
     closeEyebrow: 'Come Worship With Us',
     hoursLabel: 'Sunday Service',
-    hoursValue: '11:00 – 13:00',
+    hoursValue: '11:00 AM – 13:00 PM',
     emailLabel: 'Reach Us',
     emailValue: '+27 12 325 9973 | 083 524 0320',
     // Shown when the device is offline and the map embed can't load
@@ -493,7 +493,7 @@ const en = {
     copy: '© {year} The International Church of Pretoria. All rights reserved.',
   },
 
-  // ── Departments page ─────────────────────────
+  ///* ── Departments page ─────────────────────────
   departmentsPage: {
     metaTitle: 'Departments',
     eyebrow: 'Serve · Belong · Grow',
@@ -583,7 +583,7 @@ const en = {
     ],
   },
 
-  // ── Gallery page: opening "memory lane" ──
+  ///* ── Gallery page: opening "memory lane" ──
   memoryLane: {
     eyebrow: 'Memory Lane',
     titleLine1: 'Where it all',
@@ -597,7 +597,7 @@ const en = {
     play: 'Resume slideshow',
   },
 
-  // ── Gallery page (chronological) ─────────────
+  ///* ── Gallery page (chronological) ─────────────
   galleryPage: {
     metaTitle: 'Gallery',
     eyebrow: 'A Visual Journey',
@@ -702,7 +702,7 @@ const fr = {
     next: {
       kicker: 'Prochain Rassemblement',
       service: 'Service du Dimanche',
-      time: 'Dimanches · 09:00',
+      time: 'Dimanches · 11:00 AM',
       separator: '·',
       live: 'En direct',
       starting: 'Commence sous peu',
@@ -1003,7 +1003,7 @@ const fr = {
     public: 'À quelques minutes à pied de la gare de Capital Park, taxis minibus réguliers le long de Paul Kruger Street.',
     closeEyebrow: 'Venez Adorer Avec Nous',
     hoursLabel: 'Service du Dimanche',
-    hoursValue: '11:00 – 13:00',
+    hoursValue: '11:00 AM – 13:00 PM',
     emailLabel: 'Nous Joindre',
     emailValue: '+27 12 325 9973 | 083 524 0320',
     offlineTitle: 'Vous semblez être hors ligne',

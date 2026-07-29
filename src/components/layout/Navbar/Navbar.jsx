@@ -91,7 +91,8 @@ export default function Navbar() {
             <span className={`nav__lang-opt${lang === 'fr' ? ' is-active' : ''}`}>FR</span>
           </button>
 
-          <button
+          {/* Theme toggle button is currently disabled because the theme is hardcoded to 'light' in ThemeContext.jsx. If you want to enable it, you can uncomment the theme state initialization in ThemeContext.jsx and adjust the logic accordingly. */}
+          {/* <button
             className="nav__toggle"
             onClick={toggleTheme}
             aria-label={themeAria}
@@ -104,7 +105,7 @@ export default function Navbar() {
             <span className="nav__toggle-icon nav__toggle-icon--light" aria-hidden="true">
               <FontAwesomeIcon icon={faMoon} />
             </span>
-          </button>
+          </button> */}
 
           <button
             className={`nav__hamburger${menuOpen ? ' nav__hamburger--open' : ''}`}

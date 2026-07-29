@@ -78,7 +78,8 @@ export default function MobileMenu({ open, onClose, links = [], isLinkActive = (
           <span className={lang === 'fr' ? 'is-active' : ''}>FR</span>
         </button>
 
-        <button
+        {/* Theme toggle button is currently disabled because the theme is hardcoded to 'light' in ThemeContext.jsx. If you want to enable it, you can uncomment the theme state initialization in ThemeContext.jsx and adjust the logic accordingly. */}
+        {/* <button
           type="button"
           className="mobile-menu__toggle mobile-menu__toggle--theme"
           onClick={toggleTheme}
@@ -86,7 +87,7 @@ export default function MobileMenu({ open, onClose, links = [], isLinkActive = (
           aria-label={theme === 'dark' ? t('common.switchToLight') : t('common.switchToDark')}
         >
           <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
-        </button>
+        </button> */}
       </div>
 
       <div className="mobile-menu__footer">

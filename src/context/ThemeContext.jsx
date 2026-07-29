@@ -6,9 +6,15 @@ const ThemeContext = createContext();
 const SEASON_STORAGE_KEY = 'icp-season-override';
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('icp-theme') || 'dark';
-  });
+  // The theme is detected automatically, but users can override via localStorage.
+  // Values: 'dark' (default) | 'light'
+  // const [theme, setTheme] = useState(() => {
+  //   return localStorage.getItem('icp-theme') || 'dark';
+  // });
+
+  // The theme is detected automatically, but users can override via localStorage.
+  // Values: 'light'
+  const [theme, setTheme] = useState('light');
 
   // The liturgical season is detected automatically, but admins (or
   // visitors who want to preview) can override via localStorage.

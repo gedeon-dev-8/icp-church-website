@@ -301,6 +301,10 @@
   border: 1px solid var(--border);
   transition: $t-fast, var(--t-theme);
 
+    @include respond($bp-md) {
+    width: stretch;
+  }
+
   &:hover {
     color: var(--cyan);
     border-color: var(--cyan);
@@ -312,7 +316,8 @@
   font-family: $font-cinzel;
   font-size: 0.56rem;
   letter-spacing: 0.14em;
-  color: var(--cyan);
+  //color: var(--cyan);
+  color: var(--text-dim);
   opacity: 0.8;
   font-weight: 500;
   padding-left: 0.5rem;

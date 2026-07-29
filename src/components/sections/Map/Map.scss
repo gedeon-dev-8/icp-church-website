@@ -325,7 +325,8 @@
 }
 
 .map__close-value--link {
-  color: var(--cyan);
+  // color: var(--cyan);
+  color: var(--heading);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: color 0.3s, border-color 0.3s;
