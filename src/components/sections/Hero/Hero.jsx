@@ -136,11 +136,11 @@ export default function Hero() {
 
       <div className="hero__lines hero__layer hero__layer--depth-1" aria-hidden="true">
         <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
-          <path d="M0 450 Q360 200 720 450 Q1080 700 1440 450" stroke="#1ad8d8" strokeWidth="1"/>
-          <path d="M0 300 Q480 600 960 300 Q1200 150 1440 300" stroke="#1ad8d8" strokeWidth="0.5"/>
-          <line x1="720" y1="0" x2="720" y2="900" stroke="#1ad8d8" strokeWidth="0.5"/>
-          <circle cx="720" cy="200" r="120" stroke="#1ad8d8" strokeWidth="0.5" fill="none"/>
-          <circle cx="720" cy="200" r="60" stroke="#1ad8d8" strokeWidth="0.3" fill="none"/>
+          <path d="M0 450 Q360 200 720 450 Q1080 700 1440 450" stroke="#1ad8d8" strokeWidth="1" />
+          <path d="M0 300 Q480 600 960 300 Q1200 150 1440 300" stroke="#1ad8d8" strokeWidth="0.5" />
+          <line x1="720" y1="0" x2="720" y2="900" stroke="#1ad8d8" strokeWidth="0.5" />
+          <circle cx="720" cy="200" r="120" stroke="#1ad8d8" strokeWidth="0.5" fill="none" />
+          <circle cx="720" cy="200" r="60" stroke="#1ad8d8" strokeWidth="0.3" fill="none" />
         </svg>
       </div>
 
@@ -165,6 +165,20 @@ export default function Hero() {
             {' '}
             <span className="accent">
               <AnimatedWords text={t('hero.titleAccent')} baseDelay={0.62} />
+            </span>
+          </span>
+        </h1>
+
+        <hr/>
+
+        <h1 id="hero-title" className="hero__title__sub" key={titleKey}>
+          <span className="hero__title-line">
+            <AnimatedWords text={t('hero.titleLine22')} baseDelay={0.45} />
+            <span className="hero__title-line">
+            <AnimatedWords text={t('hero.titleLine11')} baseDelay={0.20} />
+          </span>
+            <span className="accent">
+              <AnimatedWords text={t('hero.titleAccent1')} baseDelay={0.62} />
             </span>
           </span>
         </h1>

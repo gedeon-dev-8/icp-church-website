@@ -55,7 +55,7 @@ const mergeRefs = (refs, items) => refs.map((r, i) => ({ ...r, ...items[i] }));
 const en = {
 
   toolbar: {
-    tagline: 'The International Church of Pretoria',
+    tagline: 'The International Church of Pretoria | Église Internationale de Pretoria',
     tbService: 'Sunday Services · 11:00 AM',
   },
 
@@ -95,9 +95,12 @@ const en = {
   hero: {
     eyebrow: 'Est. Pretoria · Community of Faith',
     titleLine1: 'The International',
+    titleLine11: 'Internationale',
     titleLine2: 'Church',
+    titleLine22: 'Église',
     titleAccent: 'of Pretoria',
-    sub: 'A family of believers from across Africa, united around one truth — the Word of God. Join us as we worship, grow, and serve together.',
+    titleAccent1: 'de Pretoria',
+    sub: 'A family of believers from across Africa, united around one truth — the Word of God. Join us as we worship, grow, and serve together. Our church services run in English and French.',
     ctaPrimary: 'Join Us Sunday',
     ctaSecondary: 'Our Story',
     scroll: 'Scroll to explore',
@@ -815,7 +818,7 @@ const fr = {
     titleLine1: 'L’Église',
     titleLine2: 'Internationale',
     titleAccent: 'de Pretoria',
-    sub: 'Une famille de croyants venus de toute l’Afrique, unie autour d’une seule vérité — la Parole de Dieu. Rejoignez-nous pour adorer, grandir et servir ensemble.',
+    sub: "Une famille de croyants venus de toute l'Afrique, unis autour d'une seule vérité : la Parole de Dieu. Rejoignez-nous pour adorer, grandir et servir ensemble. Nos cultes sont célébrés en anglais et en français.",
     ctaPrimary: 'Rejoignez-nous Dimanche',
     ctaSecondary: 'Notre Histoire',
     scroll: 'Faites défiler pour explorer',
