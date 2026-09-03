@@ -222,7 +222,7 @@ body[data-page='history'] .nav--scrolled .nav__link {
 
 // Scrolled override for gallery/departments — kept as a separate,
 // flat rule (NOT nested in .nav__link) so the ancestor order is correct.
-body[data-page='home'] .nav--scrolled .nav__link,
+body[data-page='home'] .nav--scrolled .nav__lang-opt,
 body[data-page='giving'] .nav--scrolled .nav__lang-opt,
 body[data-page='gallery'] .nav--scrolled .nav__lang-opt,
 body[data-page='departments'] .nav--scrolled .nav__lang-opt,
@@ -234,7 +234,8 @@ body[data-page='history'] .nav--scrolled .nav__lang-opt {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--toggle-bg);
+  // background: var(--toggle-bg);
+  background: var(var--toolbar-bg);
   border: 1px solid var(--toggle-br);
   cursor: pointer;
   display: flex;
