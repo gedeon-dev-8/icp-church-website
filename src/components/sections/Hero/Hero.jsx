@@ -99,6 +99,7 @@ export default function Hero() {
 
   // Re-trigger word animation when language changes (key change forces remount)
   const titleKey = `title-${lang}`;
+  const titleTwoKey = `titleTwo-${lang}`;
 
   return (
     <section
@@ -171,9 +172,10 @@ export default function Hero() {
 
         <hr/>
 
-        <h1 id="hero-title" className="hero__title__sub" key={titleKey}>
+        <h1 id="hero-title" className="hero__title__sub" key={titleTwoKey}>
           <span className="hero__title-line">
             <AnimatedWords text={t('hero.titleLine22')} baseDelay={0.45} />
+            {' '}
             <span className="hero__title-line">
             <AnimatedWords text={t('hero.titleLine11')} baseDelay={0.20} />
           </span>

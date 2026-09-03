@@ -816,8 +816,11 @@ const fr = {
   hero: {
     eyebrow: 'Établi à Pretoria · Communauté de Foi',
     titleLine1: 'L’Église',
+    titleLine11: 'Church',
     titleLine2: 'Internationale',
+    titleLine22: 'The International',
     titleAccent: 'de Pretoria',
+    titleAccent1: 'of Pretoria',
     sub: "Une famille de croyants venus de toute l'Afrique, unis autour d'une seule vérité : la Parole de Dieu. Rejoignez-nous pour adorer, grandir et servir ensemble. Nos cultes sont célébrés en anglais et en français.",
     ctaPrimary: 'Rejoignez-nous Dimanche',
     ctaSecondary: 'Notre Histoire',
