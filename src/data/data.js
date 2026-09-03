@@ -144,7 +144,7 @@ export const VALUES = [
 //   {
 //     icon: '✉️',
 //     label: 'Email',
-//     value: 'info@icpretoria.org',
+//     value: 'icpeip012@gmail.com',
 //   },
 // ];
 

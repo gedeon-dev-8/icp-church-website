@@ -72,6 +72,13 @@ $section-pad-sm: 5rem 1.5rem;
   --ticker-bg: #{$cyan};
   --hero-ourStrory-cta-btn: #{$cyan};
   --hero-ourStrory-cta-btn-border: #{$cyan};
+  --toolbar-bg:   rgb(7, 16, 15);
+  --toolbar-main: rgb(185, 210, 208);
+  --toolbaline:   rgba(185, 210, 208, 0.4);
+  --tb-divider:   rgba(185, 210, 208, 0.12);
+  --tb-social:    rgba(185, 210, 208, 0.45);
+  --tb-social-hover: rgba(185, 210, 208, 0.07);
+  --tb-service:   rgba(185, 210, 208, 0.35);
 }
 
 // ─── Liturgical season tints ─────────────────
@@ -140,8 +147,8 @@ $section-pad-sm: 5rem 1.5rem;
 //   • Tone down cyan tinting so the brand colour reads as accent, not wash.
 //   • Slightly warmer/greener neutrals (less clinical "Apple Store" white).
 [data-theme='light'] {
-  --bg:           #e7eeec;   /* ↓ from #f6faf9 — less glare */
-  --bg2:          #dde7e3;   /* ↓ slightly deeper for section variety */
+  --bg:           #e1eae7; /*#e7eeec;   /* ↓ from #f6faf9 — less glare */
+  --bg2:          #dde7e3; /*#dde7e3;   /* ↓ slightly deeper for section variety */
   --bg3:          #f0f4f2;   /* off-white, replaces pure #ffffff */
   --bg4:          #e3ebe8;
   --surface:      #f0f4f2;   /* off-white surface (was pure white) */
@@ -170,7 +177,14 @@ $section-pad-sm: 5rem 1.5rem;
   --toggle-br:    rgba(13, 130, 130, 0.28);
   --svg-opacity:  0.11;
   --cross-opacity:0.07;
-  --ticker-bg: #061d1a;
+  --ticker-bg:    #061d1a;
   --hero-ourStrory-cta-btn: #061d1a;
   --hero-ourStrory-cta-btn-border: #061d1a;
+  --toolbar-main: rgb(185, 210, 208);
+  --toolbar-bg:   rgb(6, 29, 26);
+  --tb-tagline:   rgba(0,249,249,0.4);
+  --tb-divider:   rgba(0,249,249,0.12);
+  --tb-social:    rgba(0,249,249,0.45);
+  --tb-social-hover: rgba(0,249,249,0.07);
+  --tb-service:   rgba(0,249,249,0.35);
 }

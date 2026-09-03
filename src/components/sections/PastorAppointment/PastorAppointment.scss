@@ -1,0 +1,169 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.appt {
+  padding: 3.5rem 5rem;
+  background: var(--bg2);
+  transition: background 0.45s;
+
+  @include respond($bp-lg) { padding: 3rem 3rem; }
+  @include respond($bp-md) { padding: 2.5rem 1.5rem; }
+}
+
+.appt__card {
+  @include reveal-base;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  padding: 2rem 2.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--cyan);
+  transition: $t-fast, var(--t-theme);
+
+  @include respond($bp-lg) {
+    flex-wrap: wrap;
+    padding: 1.8rem 2rem;
+  }
+
+  @include respond($bp-md) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.8rem 1.6rem;
+    gap: 1.4rem;
+  }
+}
+
+.appt__icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  font-size: 1.3rem;
+
+  @include respond($bp-md) { width: 48px; height: 48px; font-size: 1.1rem; }
+}
+
+.appt__text {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.appt__eyebrow {
+  font-family: $font-cinzel;
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+.appt__title {
+  font-family: $font-display;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--heading);
+  line-height: 1.25;
+  transition: color 0.45s;
+
+  @include respond($bp-md) { font-size: 1.28rem; }
+}
+
+.appt__schedule {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+
+  svg { color: var(--cyan); font-size: 0.82rem; }
+}
+
+.appt__actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  @include respond($bp-md) { width: 100%; }
+}
+
+.appt__call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1.4rem;
+  background: var(--cyan);
+  color: #050a0a;
+  text-decoration: none;
+  font-family: $font-body;
+  transition: $t-fast;
+  flex: 1;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--cyan-deep);
+  }
+
+  svg { font-size: 1.05rem; flex-shrink: 0; }
+
+  @include respond($bp-md) { width: 100%; justify-content: center; }
+}
+
+.appt__call-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.appt__call-label {
+  font-family: $font-cinzel;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.appt__call-number {
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.appt__copy {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: $t-fast;
+  font-size: 0.9rem;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+    color: var(--cyan);
+  }
+
+  &.is-copied {
+    border-color: #00d4a0;
+    background: rgba(0, 212, 160, 0.12);
+    color: #00d4a0;
+  }
+}

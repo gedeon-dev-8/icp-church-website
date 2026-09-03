@@ -15,7 +15,7 @@ import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import './Navbar.scss';
 
 // ID of every observable section on the home page.
-const HOME_SECTION_IDS = ['hero', 'about', 'announcement', 'sermons', 'events', 'map'];
+const HOME_SECTION_IDS = ['hero', 'about', 'announcement', 'sermons', 'events', 'map', 'contact'];
 
 const buildLinks = (t) => [
   { key: 'home',         label: t('nav.home'),         href: '/#hero',         sectionId: 'hero',         type: 'hash'  },
@@ -23,9 +23,11 @@ const buildLinks = (t) => [
   { key: 'announcement', label: t('nav.announcement'), href: '/#announcement', sectionId: 'announcement', type: 'hash'  },
   { key: 'sermons',      label: t('nav.sermons'),      href: '/#sermons',      sectionId: 'sermons',      type: 'hash'  },
   { key: 'events',       label: t('nav.events'),       href: '/#events',       sectionId: 'events',       type: 'hash'  },
-  { key: 'departments',  label: t('nav.departments'),  href: '/departments',   type: 'route' },
-  { key: 'gallery',      label: t('nav.gallery'),      href: '/gallery',       type: 'route' },
+  // { key: 'departments',  label: t('nav.departments'),  href: '/departments',   type: 'route' },
+  // { key: 'gallery',      label: t('nav.gallery'),      href: '/gallery',       type: 'route' },
   { key: 'visit',        label: t('nav.visit'),        href: '/#map',          sectionId: 'map',          type: 'hash'  },
+  { key: 'contact',      label: t('nav.contact'),      href: '/#contact',      sectionId: 'contact',      type: 'hash'  },
+  { key: 'give',         label: t('nav.give'),         href: '/give',             type: 'route' },
 ];
 
 export default function Navbar() {
@@ -54,7 +56,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
+      <nav 
         className={`nav${scrolled ? ' nav--scrolled' : ''}`}
         aria-label={t('nav.home')}
       >
@@ -92,7 +94,7 @@ export default function Navbar() {
           </button>
 
           {/* Theme toggle button is currently disabled because the theme is hardcoded to 'light' in ThemeContext.jsx. If you want to enable it, you can uncomment the theme state initialization in ThemeContext.jsx and adjust the logic accordingly. */}
-          {/* <button
+          <button
             className="nav__toggle"
             onClick={toggleTheme}
             aria-label={themeAria}
@@ -105,7 +107,7 @@ export default function Navbar() {
             <span className="nav__toggle-icon nav__toggle-icon--light" aria-hidden="true">
               <FontAwesomeIcon icon={faMoon} />
             </span>
-          </button> */}
+          </button>
 
           <button
             className={`nav__hamburger${menuOpen ? ' nav__hamburger--open' : ''}`}

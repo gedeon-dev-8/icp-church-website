@@ -3,6 +3,7 @@ import { useScrollReveal } from '../../../hooks/useScrollReveal';
 import { useLang } from '../../../context/LanguageContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTriangleExclamation, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import CONTACT_PHOTO from '../../../assets/images/Contact-Page-Side-Image.png';
 import './Contact.scss';
 
 function Reveal({ children, className = '', delay = 0 }) {
@@ -33,8 +34,11 @@ const INITIAL = { firstName: '', lastName: '', email: '', subject: '', message: 
 // form is always usable — the user's mail client opens with the message
 // pre-filled. Not ideal, but it never silently swallows submissions.
 // ────────────────────────────────────────────────────────────────────
-const CONTACT_ENDPOINT  = import.meta.env.VITE_CONTACT_ENDPOINT || '';
-const CONTACT_FALLBACK  = 'info@icpretoria.org';
+const CONTACT_ENDPOINT    = import.meta.env.VITE_CONTACT_ENDPOINT || '';
+// Web3Forms rejects submissions without this — Formspree ignores it.
+// Set VITE_CONTACT_ACCESS_KEY when VITE_CONTACT_ENDPOINT points at Web3Forms.
+const CONTACT_ACCESS_KEY  = import.meta.env.VITE_CONTACT_ACCESS_KEY || '';
+const CONTACT_FALLBACK    = 'icpeip012@gmail.com';
 
 function buildMailtoFallback(form) {
   const subject = encodeURIComponent(form.subject || 'Message from icpretoria.org');
@@ -63,6 +67,7 @@ async function submitToEndpoint(form) {
       // Honeypot field name varies by provider; both Formspree and
       // Web3Forms ignore unknown keys, so this is safe to include.
       _replyto:  form.email,
+      ...(CONTACT_ACCESS_KEY ? { access_key: CONTACT_ACCESS_KEY } : {}),
     }),
   });
   if (!res.ok) {
@@ -88,7 +93,6 @@ const buildValidator = (f) => (form) => {
 export default function Contact() {
   const { t } = useLang();
   const f = t('contact.fields') || {};
-  const items = t('contact.items') || [];
   const validate = buildValidator(f);
 
   const [form, setForm] = useState(INITIAL);
@@ -101,7 +105,14 @@ export default function Contact() {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
     if (touched[name]) {
-      setErrors(validate({ ...form, [name]: value }));
+      const nextErrors = validate({ ...form, [name]: value });
+      setErrors(nextErrors);
+      // Drop the "correct the highlighted fields" banner the moment
+      // every field is valid again — it shouldn't outlive the errors
+      // it refers to.
+      if (status === 'validation' && Object.keys(nextErrors).length === 0) {
+        setStatus(null);
+      }
     }
   };
 
@@ -117,7 +128,7 @@ export default function Contact() {
     setErrors(v);
     setTouched({ firstName: true, lastName: true, email: true, subject: true, message: true });
     if (Object.keys(v).length > 0) {
-      setStatus('error');
+      setStatus('validation');
       return;
     }
 
@@ -128,23 +139,26 @@ export default function Contact() {
       if (CONTACT_ENDPOINT) {
         // Real POST to the configured form service.
         await submitToEndpoint(form);
+        setStatus('success');
       } else {
         // No endpoint configured — hand the message off to the user's
         // mail client so the form is still useful in production even
-        // before the team plugs in a backend.
+        // before the team plugs in a backend. We can't confirm the
+        // visitor actually hits "send" in their mail app, so the
+        // status/copy for this path stays honest about that.
         if (typeof window !== 'undefined') {
           window.location.href = buildMailtoFallback(form);
         }
+        setStatus('fallback-success');
       }
-      setStatus('success');
       setForm(INITIAL);
       setTouched({});
     } catch (err) {
-      // Network or validation failure on the server. We keep the
-      // user's input intact so they can retry without retyping.
+      // Network/server failure — the user's input is fine, so keep it
+      // intact and don't imply their fields need fixing.
       // eslint-disable-next-line no-console
       console.error('Contact submission failed', err);
-      setStatus('error');
+      setStatus('submit-error');
     } finally {
       setSubmitting(false);
     }
@@ -169,19 +183,19 @@ export default function Contact() {
           <h2 id="contact-title">{t('contact.titleLine1')}<br /><em>{t('contact.titleAccent')}</em></h2>
         </Reveal>
 
-        <div className="contact__items">
-          {items.map((item, i) => (
-            <Reveal key={item.label} className="contact__item" delay={0.1 * (i + 1)}>
-              <div className="contact__item-icon" aria-hidden="true">
-                {item.icon && <FontAwesomeIcon icon={item.icon} />}
-              </div>
-              <div>
-                <div className="contact__item-label">{item.label}</div>
-                <div className="contact__item-value">{item.value}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal className="contact__photo" delay={0.15}>
+          <img
+            src={CONTACT_PHOTO}
+            alt=""
+            className="contact__photo-img"
+            loading="lazy"
+          />
+          <div className="contact__photo-scrim" aria-hidden="true" />
+          <blockquote className="contact__quote">
+            {t('contact.quote')}
+            <cite className="contact__quote-attribution">{t('contact.quoteAttribution')}</cite>
+          </blockquote>
+        </Reveal>
       </div>
 
       <div className="contact__form-panel">
@@ -282,7 +296,17 @@ export default function Contact() {
                   <span>{t('contact.successMsg')}</span>
                 </div>
               )}
-              {status === 'error' && (
+              {status === 'fallback-success' && (
+                <div className="form-status form-status--success">
+                  <FontAwesomeIcon
+                    icon={faCircleCheck}
+                    aria-hidden="true"
+                    className="form-status__icon"
+                  />
+                  <span>{t('contact.fallbackSuccessMsg')}</span>
+                </div>
+              )}
+              {status === 'validation' && (
                 <div className="form-status form-status--error">
                   <FontAwesomeIcon
                     icon={faTriangleExclamation}
@@ -292,11 +316,21 @@ export default function Contact() {
                   <span>{t('contact.errorMsg')}</span>
                 </div>
               )}
+              {status === 'submit-error' && (
+                <div className="form-status form-status--error">
+                  <FontAwesomeIcon
+                    icon={faTriangleExclamation}
+                    aria-hidden="true"
+                    className="form-status__icon"
+                  />
+                  <span>{t('contact.submitErrorMsg')}</span>
+                </div>
+              )}
             </div>
 
             <p className="form-note">
               {t('contact.notePrefix')}
-              <a href="mailto:info@icpretoria.org" className="form-note-link">
+              <a href="mailto:icpeip012@gmail.com" className="form-note-link">
                 {t('contact.noteEmail')}
               </a>
               {t('contact.notePostfix')}

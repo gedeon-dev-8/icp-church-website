@@ -338,7 +338,7 @@ $mem-bg:        #0a0604;
   }
 
   @include respond($bp-md) {
-    top: 5.5rem;
+    //top: 5.5rem;
     right: 1.5rem;
     font-size: 0.5rem;
 

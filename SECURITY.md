@@ -28,7 +28,7 @@ For those, please open a normal issue using the templates under `.github/ISSUE_T
 
 **Please don't open a public GitHub issue for security matters.** Email us instead:
 
-- **info@icpretoria.org** — for general security concerns or content-related takedown requests
+- **icpeip012@gmail.com** — for general security concerns or content-related takedown requests
 
 Include:
 
@@ -59,7 +59,7 @@ The Republic of South Africa's Protection of Personal Information Act (POPIA) ap
 - Anonymise IP addresses on the analytics side (`anonymize_ip: true` is set in `gtag` config)
 - Respect a visitor's request to delete any data we hold about them
 
-If you'd like to exercise a data-access or deletion right, please email **info@icpretoria.org**.
+If you'd like to exercise a data-access or deletion right, please email **icpeip012@gmail.com**.
 
 ---
 

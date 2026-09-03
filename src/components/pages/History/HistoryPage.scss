@@ -1,0 +1,655 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.history-page {
+  background: var(--bg);
+  transition: background 0.45s;
+}
+
+// ── Hero header ──────────────────────────────
+// Same photo-veil formula as the Departments hero — dark legibility
+// gradient + faint cyan glow over an archival photo from the church's
+// early years, so the page opens on the church's own history.
+.history-hero {
+  position: relative;
+  padding: 12rem 5rem 7rem;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--cyan-dim) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, var(--cyan-dim) 0%, transparent 60%),
+    var(--bg2);
+  transition: background 0.45s;
+  border-bottom: 1px solid var(--border2);
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--cyan), transparent);
+    opacity: 0.45;
+    z-index: 2;
+  }
+
+  @include respond($bp-lg) {
+    padding: 10rem 3rem 5rem;
+  }
+
+  @include respond($bp-md) {
+    padding: 8rem 1.5rem 4rem;
+  }
+}
+
+.history-hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: grayscale(0.4) sepia(0.15);
+  // Triple stack (top → bottom):
+  //   1. Dark legibility gradient (the key to text contrast)
+  //   2. Subtle cyan glow for brand warmth
+  //   3. The archival photo, cover-fitted to the section
+  background:
+    linear-gradient(180deg,
+      rgba(5, 10, 10, 0.72) 0%,
+      rgba(5, 10, 10, 0.52) 35%,
+      rgba(5, 10, 10, 0.65) 70%,
+      rgba(5, 10, 10, 0.92) 100%),
+    radial-gradient(ellipse at 50% 55%,
+      rgba(26, 216, 216, 0.12) 0%,
+      transparent 65%),
+    url('../../../assets/images/Hero-Images/1.gif') center 30% / cover no-repeat;
+}
+
+.history-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.history-hero__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.92);
+
+  &::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+}
+
+.history-hero__title {
+  @include section-title;
+  @include reveal-base;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-shadow:
+    0 2px 30px rgba(0, 0, 0, 0.55),
+    0 4px 14px rgba(0, 0, 0, 0.35);
+
+  em {
+    color: var(--cyan);
+    font-style: italic;
+    text-shadow: 0 0 36px rgba(26, 216, 216, 0.45);
+  }
+}
+
+.history-hero__sub {
+  @include reveal-base;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+// ── Narrative chapters ───────────────────────
+// Long-form article read — one column, generous measure, each chapter
+// numbered like a table of contents so a long story stays scannable.
+.history-narrative {
+  padding: 7rem 5rem;
+  background: var(--bg);
+  transition: background 0.45s;
+
+  @include respond($bp-lg) {
+    padding: 5rem 3rem;
+  }
+
+  @include respond($bp-md) {
+    padding: 4rem 1.5rem;
+  }
+}
+
+.history-narrative__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.history-chapter {
+  @include reveal-base;
+  position: relative;
+  padding-left: 3.6rem;
+
+  @include respond($bp-sm) {
+    padding-left: 0;
+  }
+}
+
+.history-chapter__num {
+  position: absolute;
+  top: 0.1rem;
+  left: 0;
+  font-family: $font-display;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--cyan);
+  opacity: 0.75;
+
+  @include respond($bp-sm) {
+    position: static;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.history-chapter__heading {
+  font-family: $font-cinzel;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--heading);
+  font-weight: 600;
+  margin: 0 0 0.9rem;
+  transition: color 0.45s;
+}
+
+.history-chapter__body {
+  font-size: 1.04rem;
+  line-height: 1.9;
+  color: var(--text);
+  font-weight: 300;
+  margin: 0;
+  text-align: justify;
+}
+
+// ── Founding Pastor spotlight ────────────────
+// Same portrait-frame language as About/PastorWelcome (offset border +
+// corner brackets) so the founder reads as part of the same visual
+// family, scaled down since this is a supporting profile, not a hero.
+.history-founder {
+  padding: 2rem 5rem 7rem;
+  background: var(--bg);
+  transition: background 0.45s;
+
+  @include respond($bp-lg) {
+    padding: 1rem 3rem 5rem;
+  }
+
+  @include respond($bp-md) {
+    padding: 0 1.5rem 4rem;
+  }
+}
+
+.history-founder__inner {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 4.5rem;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @include respond($bp-lg) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 460px;
+  }
+}
+
+.history-founder__visual {
+  position: relative;
+  @include reveal-base;
+}
+
+.history-founder__offset {
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border2);
+  z-index: -1;
+  background: #0b1515;
+  transition: border-color 0.45s;
+
+  @include respond($bp-md) {
+    display: none;
+  }
+}
+
+.history-founder__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: border-color 0.45s;
+}
+
+.history-founder__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  @include photo-warmth(0.92);
+  transition: filter 0.7s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .history-founder__visual:hover & {
+    filter: brightness(1) saturate(1) contrast(1) sepia(0);
+    transform: scale(1.03);
+  }
+}
+
+.history-founder__corner {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  border: 3px solid var(--border2);
+  pointer-events: none;
+  z-index: 10;
+  transition: border-color 0.45s;
+}
+
+.history-founder__bracket {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+
+  &--tl {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+  }
+
+  &--tr {
+    top: -1px;
+    right: -1px;
+    border-top: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+  }
+
+  &--bl {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+  }
+
+  &--br {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+  }
+}
+
+.history-founder__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+}
+
+.history-founder__title {
+  @include reveal-base;
+  font-family: $font-display;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 300;
+  color: var(--heading);
+  margin: 0 0 0.5rem;
+  transition: color 0.45s;
+}
+
+.history-founder__role {
+  @include reveal-base;
+  display: block;
+  font-family: $font-cinzel;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+  margin-bottom: 1.4rem;
+}
+
+.history-founder__body {
+  @include reveal-base;
+
+  p {
+    font-size: 1.02rem;
+    line-height: 1.85;
+    color: var(--text);
+    font-weight: 300;
+    margin: 0 0 1rem;
+    text-align: justify;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// ── Closing statement ────────────────────────
+// Reuses the Scripture section's big-quote language so the mission
+// statement lands with the same weight as the year's theme verse.
+.history-closing {
+  padding: $section-pad;
+  background: var(--scripture-bg);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  transition: background 0.45s;
+
+  &::before {
+    content: '\201C';
+    position: absolute;
+    top: -3rem;
+    left: 2rem;
+    font-family: $font-display;
+    font-size: 18rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--q-char);
+    pointer-events: none;
+    transition: color 0.45s;
+
+    @include respond($bp-md) {
+      font-size: 10rem;
+    }
+  }
+
+  @include respond($bp-lg) {
+    padding: $section-pad-md;
+  }
+
+  @include respond($bp-md) {
+    padding: $section-pad-sm;
+  }
+}
+
+.history-closing__line {
+  display: block;
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--cyan), transparent);
+  margin: 0 auto 2.4rem;
+  @include reveal-base;
+}
+
+.history-closing__text {
+  font-family: $font-display;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--heading);
+  line-height: 1.55;
+  max-width: 820px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  transition: color 0.45s;
+  @include reveal-base;
+}
+
+.history-closing__mark {
+  font-family: $font-display;
+  color: var(--cyan);
+  opacity: 0.5;
+  margin: 0 0.05em;
+}
+
+// ── Pastoral leadership lineage ──────────────
+.history-leadership {
+  padding: 5rem 5rem 6rem;
+  background: var(--bg);
+  text-align: center;
+  transition: background 0.45s;
+
+  @include respond($bp-lg) {
+    padding: 4rem 3rem 5rem;
+  }
+
+  @include respond($bp-md) {
+    padding: 3rem 1.5rem 4rem;
+  }
+}
+
+.history-leadership__label {
+  @include eyebrow;
+  @include reveal-base;
+  justify-content: center;
+  margin-bottom: 2.6rem;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+}
+
+.history-leadership__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  max-width: 720px;
+  margin: 0 auto;
+
+  @include respond($bp-sm) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.history-leadership__arrow {
+  font-family: $font-display;
+  font-size: 1.3rem;
+  color: var(--cyan);
+  opacity: 0.6;
+
+  @include respond($bp-sm) {
+    transform: rotate(90deg);
+  }
+}
+
+.history-leader-wrap {
+  @include reveal-base;
+}
+
+.history-leader {
+  display: block;
+  padding: 1.6rem 2.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  min-width: 220px;
+  text-decoration: none;
+  transition: $t-fast, var(--t-theme);
+
+  &:hover {
+    border-color: var(--border);
+    transform: translateY(-3px);
+  }
+
+  // Cards linking elsewhere (e.g. today's pastor → his welcome section)
+  // get a visible affordance so the click target reads as interactive.
+  &--link:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 10px 28px rgba(13, 148, 148, 0.14);
+  }
+}
+
+.history-leader__years {
+  display: block;
+  font-family: $font-cinzel;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.history-leader__name {
+  display: block;
+  font-family: $font-display;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--heading);
+  margin-bottom: 0.3rem;
+  transition: color 0.45s;
+}
+
+.history-leader__role {
+  display: block;
+  font-family: $font-cinzel;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+// ── Final CTA band ────────────────────────────
+.history-final {
+  padding: 7rem 5rem;
+  background: var(--bg2);
+  border-top: 1px solid var(--border2);
+  transition: background 0.45s, border-color 0.45s;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  &::before {
+    top: -100px;
+    left: -120px;
+  }
+
+  &::after {
+    bottom: -120px;
+    right: -100px;
+  }
+
+  @include respond($bp-lg) {
+    padding: 5rem 3rem;
+  }
+
+  @include respond($bp-md) {
+    padding: 4rem 1.5rem;
+  }
+}
+
+.history-final__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.history-final__eyebrow {
+  @include eyebrow;
+  @include reveal-base;
+  justify-content: center;
+}
+
+.history-final__title {
+  @include section-title;
+  @include reveal-base;
+  margin-bottom: 1.4rem;
+
+  em {
+    font-style: italic;
+    color: var(--cyan);
+  }
+}
+
+.history-final__sub {
+  @include reveal-base;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--text-dim);
+  margin-bottom: 2.4rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.history-final__cta {
+  @include reveal-base;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.history-final__btn {
+  &--primary {
+    @include btn-primary;
+  }
+
+  &--ghost {
+    @include btn-ghost;
+
+    background: var(--surface);
+    border: 1.5px solid var(--cyan);
+    color: var(--heading);
+    font-weight: 700;
+    box-shadow: 0 2px 14px rgba(13, 130, 130, 0.10);
+
+    &:hover,
+    &:focus-visible {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: #050a0a;
+      box-shadow: 0 6px 22px rgba(13, 130, 130, 0.28);
+    }
+  }
+}

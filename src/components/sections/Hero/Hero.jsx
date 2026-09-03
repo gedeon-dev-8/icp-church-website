@@ -11,13 +11,13 @@ import './Hero.scss';
 // names the file inside /assets/images/Hero-Images/ so swapping a
 // shot is a one-line change.
 // ────────────────────────────────────────────────────────────────────
-const CURATED_FILENAMES = ['1.png', '15.jpeg', '17.jpeg', '14.jpeg'];
+const CURATED_FILENAMES = ['1.png', '15.png', '17.png', '14.png'];
 
 // Vite returns a map of every file in the directory; we pick the four
 // we care about so the bundle only ships those (and the other source
 // files in /Hero-Images stay available for future curation tweaks).
 const HERO_MODULES = import.meta.glob(
-  '../../../assets/images/Hero-Images/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP}',
+  '../../../assets/images/Hero-Images/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,gif,GIF,}',
   { eager: true, import: 'default' }
 );
 

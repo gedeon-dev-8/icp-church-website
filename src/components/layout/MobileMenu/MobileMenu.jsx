@@ -18,8 +18,8 @@ import './MobileMenu.scss';
 // later live in translations.js but for now this small mirror is enough.
 const SOCIALS = [
   { href: 'https://facebook.com/groups/263029040408370',          label: 'ICP on Facebook',  icon: faFacebookF },
-  { href: 'https://youtube.com/channel/UCO5cyDDRu-jZA7oMKGqRIMg', label: 'ICP on YouTube',   icon: faYoutube  },
-  { href: 'https://instagram.com/icp.content',                    label: 'ICP on Instagram', icon: faInstagram },
+  { href: 'https://instagram.com/icp.content',                    label: 'ICP on Instagram', icon: faInstagram  },
+  { href: 'https://youtube.com/channel/UCO5cyDDRu-jZA7oMKGqRIMg', label: 'ICP on YouTube',   icon: faYoutube },
   { href: 'https://tiktok.com/@icp.content',                      label: 'ICP on TikTok',    icon: faTiktok    },
 ];
 

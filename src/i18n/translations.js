@@ -53,6 +53,12 @@ const mergeRefs = (refs, items) => refs.map((r, i) => ({ ...r, ...items[i] }));
 
 // ── ENGLISH ──────────────────────────────────────
 const en = {
+
+  toolbar: {
+    tagline: 'The International Church of Pretoria',
+    tbService: 'Sunday Services · 11:00 AM',
+  },
+
   nav: {
     home: 'Home',
     about: 'About',
@@ -60,10 +66,11 @@ const en = {
     announcement: 'Schedule',
     sermons: 'Sermons',
     events: 'Events',
-    departments: 'Departments',
-    gallery: 'Gallery',
     visit: 'Visit',
     contact: 'Contact',
+    // departments: 'Departments',
+    // gallery: 'Gallery',
+    give: 'Give',
   },
 
   common: {
@@ -108,6 +115,20 @@ const en = {
     },
   },
 
+  welcome: {
+    eyebrow: 'A Word From Our Pastor',
+    titleLine1: 'Pastor',
+    titleAccent: 'Jules Mupenda',
+    role: 'Senior Pastor',
+    body: [
+      'Pastor Jules Mupenda serves as the current Pastor of the International Church of Pretoria, providing spiritual leadership and guidance to the congregation.',
+      'With a heart for God and for people, he is committed to the preaching of the Word, prayer, discipleship, and building a Christ-centred community where people from different nations and backgrounds can grow together in faith.',
+      'Under his leadership, the church continues to pursue its mission of reaching lives, strengthening families, and equipping believers to fulfil their God-given purpose.',
+    ],
+    pullQuote: '“A heart for God, and for people.”',
+    cta: 'Meet Our Pastoral Team',
+  },
+
   ticker: [
     'Sunday Service', 'Sunday School', 'Wednesday Service', 'Intercession',
     'Cell Groups', 'Youth Ministry', 'Mothers Ministry', 'Couples Ministry',
@@ -115,22 +136,22 @@ const en = {
   ],
 
   about: {
-    eyebrow: 'Who We Are',
+    eyebrow: 'Our Story',
     titleLine1: 'A Church',
     titleAccent: 'Willed by God',
     body: [
-      '**Founded 21 November 1993** by Reverend Pastor Emmanuel Tshilenga Kabala.',
-      'A welcoming spiritual home for Christians from every corner of Pretoria — and every corner of Africa.',
-      'We work hand-in-hand with every church that names Jesus as Lord, building **one body across many traditions**.',
-      'Come as you are. Stay as family.',
+      '**Founded in 1993** by Reverend Pastor Emmanuel Tshilenga Kabala, born from a desire to see lives transformed by the love of Jesus Christ — a spiritual home where people of every nation, culture, and background could worship, grow, and serve together.',
+      'From our founding pastor to our current pastor, **Jules Mupenda**, one conviction has carried us: the Gospel speaks to the whole person, not the soul alone.',
+      'Today we remain a welcoming, multicultural family of faith — bringing hope and transformation to individuals and families across Pretoria.',
     ],
-    pullQuote: '“A welcoming spiritual home for all who call on the name of Jesus.”',
+    pullQuote: '“Everyone has a place. Every life matters.”',
     values: [
+      { title: 'Holistic Ministry', desc: 'We nurture the whole person—spiritually, emotionally, physically, and relationally—through Christ.'},
       { title: 'Faith', desc: 'Grounded in the Gospel of Jesus Christ, we live by His Word and confess Him as Lord and Savior of all.' },
       { title: 'Unity', desc: 'We embrace believers from all nations, building one spiritual family under Christ in love and harmony.' },
       { title: 'Transformation', desc: 'Committed to spiritual growth and renewal through worship, teaching, and the power of the Holy Spirit.' },
     ],
-    cta: 'Get In Touch',
+    cta: 'Read Our Full Story',
     badgeNum: '33+',
     badgeLabel: 'Years of Grace',
   },
@@ -184,7 +205,7 @@ const en = {
             id: 'wednesday',
             icon: SPROUT_ICON,
             name: 'Wednesday Service',
-            when: '1st Wednesday of the Month',
+            when: '1st Wednesday of the Month \n from 18:00 – 19:30',
           },
           {
             id: 'intercession',
@@ -196,8 +217,8 @@ const en = {
             id: 'choir',
             icon: MIC_VOCAL_ICON,
             name: 'Choir',
-            when: 'Saturday · 15:00 – 18:00',
-            extra: 'Wednesday · 17:00 – 19:30 (except 1st Wednesday)',
+            when: 'Saturday · 15:00 – 19:30',
+            // extra: 'Wednesday · 17:00 – 19:30 (except 1st Wednesday)',
           },
         ],
       },
@@ -257,13 +278,28 @@ const en = {
           {
             id: 'couples',
             icon: HEART_HANDSHAKE_ICON,
-            name: 'Couples’ Ministry',
+            name: 'Couples and Family Ministry',
             when: 'Monthly Session',
             extra: 'Quarterly Workshops / Retreats',
           },
         ],
       },
     ],
+  },
+
+  team: {
+    eyebrow: 'Leadership',
+    titleLine1: 'Pastoral',
+    titleAccent: 'Team',
+  },
+
+  appointment: {
+    eyebrow: 'One-On-One',
+    title: 'Appointment With The Pastor',
+    schedule: 'Wednesdays from 18:00',
+    callCta: 'Call to Book',
+    copyNumber: 'Copy phone number',
+    copied: 'Number copied',
   },
 
   sermons: {
@@ -328,7 +364,7 @@ const en = {
       'Together', 'Celebration', 'Our Sanctuary', 'Voices Lifted',
       'Hands & Hearts', 'Serving Together', 'A Joyful Noise',
       'Generations', 'Belonging', 'In His Presence', 'Family',
-      'Witness', 'The Gathering',
+      'Witness', 'The Gathering', 'Women of Faith', 'Our Preachers',
     ],
     videoCaption: 'A moment in worship',
     statNumber: '33+',
@@ -423,44 +459,42 @@ const en = {
     offlineRetry: 'Try again',
   },
 
-  // contact: {
-  //   eyebrow: 'Find Us',
-  //   titleLine1: 'Come',
-  //   titleAccent: 'Worship With Us',
-  //   items: [
-  //     { icon: '📍', label: 'Location',          value: '294 Flowers Street\nCapital Park, Pretoria, 0084' },
-  //     { icon: '🕐', label: 'Sunday Services',    value: 'Intercession: 07:30\nMain Service: 09:00' },
-  //     { icon: '📅', label: 'Wednesday Service',  value: 'Every Wednesday Evening' },
-  //     { icon: '✉️', label: 'Email',              value: 'info@icpretoria.org' },
-  //   ],
-  //   formEyebrow: 'Message Us',
-  //   formTitleLine1: 'We’d love to',
-  //   formTitleAccent: 'hear from you',
-  //   fields: {
-  //     firstName: 'First Name',
-  //     firstNamePh: 'John',
-  //     firstNameError: 'First name is required',
-  //     lastName: 'Last Name',
-  //     lastNamePh: 'Doe',
-  //     lastNameError: 'Last name is required',
-  //     email: 'Email Address',
-  //     emailPh: 'john@example.com',
-  //     emailErrorRequired: 'Email is required',
-  //     emailErrorInvalid: 'Please enter a valid email',
-  //     subject: 'Subject',
-  //     subjectPh: 'How can we help?',
-  //     subjectError: 'Please add a subject',
-  //     message: 'Message',
-  //     messagePh: 'Enter your message…',
-  //     messageError: 'Please write your message',
-  //   },
-  //   submit: 'Send Message',
-  //   successMsg: 'Thank you! Your message has been sent. We’ll be in touch soon.',
-  //   errorMsg: 'Please correct the highlighted fields and try again.',
-  //   notePrefix: 'Prefer email? Write to ',
-  //   noteEmail: 'info@icpretoria.org',
-  //   notePostfix: '.',
-  // },
+  contact: {
+    eyebrow: 'Come As You Are',
+    titleLine1: 'You Belong',
+    titleAccent: 'Here Already',
+    quote: '“Every message finds its way to someone who cares. Reach out — we would love to hear your story.”',
+    quoteAttribution: 'The ICP Pastoral Team',
+    formEyebrow: 'Message Us',
+    formTitleLine1: 'We’d love to',
+    formTitleAccent: 'hear from you',
+    fields: {
+      firstName: 'First Name',
+      firstNamePh: 'John',
+      firstNameError: 'First name is required',
+      lastName: 'Last Name',
+      lastNamePh: 'Doe',
+      lastNameError: 'Last name is required',
+      email: 'Email Address',
+      emailPh: 'john@example.com',
+      emailErrorRequired: 'Email is required',
+      emailErrorInvalid: 'Please enter a valid email',
+      subject: 'Subject',
+      subjectPh: 'How can we help?',
+      subjectError: 'Please add a subject',
+      message: 'Message',
+      messagePh: 'Enter your message…',
+      messageError: 'Please write your message',
+    },
+    submit: 'Send Message',
+    successMsg: 'Thank you! Your message has been sent. We’ll be in touch soon.',
+    fallbackSuccessMsg: 'Your email app should now open with the message ready to send. If it doesn’t open, please email us directly below.',
+    errorMsg: 'Please correct the highlighted fields and try again.',
+    submitErrorMsg: 'Something went wrong sending your message. Please try again, or email us directly below.',
+    notePrefix: 'Prefer email? Write to ',
+    noteEmail: 'icpeip012@gmail.com',
+    notePostfix: '.',
+  },
 
   footer: {
     brandName: 'ICP',
@@ -473,9 +507,11 @@ const en = {
         title: 'Other Pages',
         links: [
           { label: 'Departments', href: '/departments', type: 'route' },
+          { label: 'History', href: '/history', type: 'route' },
           { label: 'Gallery', href: '/gallery', type: 'route' },
-          { label: 'Sermons', href: '/#sermons', type: 'hash' },
-          { label: 'Events', href: '/#events', type: 'hash' },
+          { label: 'Give', href: '/give', type: 'route' },
+          // { label: 'Sermons', href: '/#sermons', type: 'hash' },
+          // { label: 'Events', href: '/#events', type: 'hash' },
         ],
       },
       {
@@ -512,7 +548,8 @@ const en = {
         icon: MIC_VOCAL_ICON,
         title: 'Choir',
         description: 'The voices and instruments that lead worship every Sunday and Wednesday. Bring your voice or your instrument — both are welcome.',
-        schedule: 'Saturdays · 15:00 – 18:00\nWednesdays · 17:00 – 19:30 (except 1st Wednesday of the month)',
+        // schedule: 'Saturdays · 15:00 – 18:00\nWednesdays · 17:00 – 19:30 (except 1st Wednesday of the month)',
+        schedule: 'Saturdays · 15:00 – 19:30',
       },
       {
         id: 'soundMedia',
@@ -537,8 +574,8 @@ const en = {
       {
         id: 'couples',
         icon: HEART_HANDSHAKE_ICON,
-        title: 'Couples',
-        description: 'Strengthening marriages through scripture, mentorship, and honest conversation.',
+        title: 'Couples and Family',
+        description: 'Strengthening couples and families through scripture, mentorship, meaningful connection, and honest conversation.',
         schedule: 'Monthly session · quarterly workshops',
       },
       {
@@ -595,6 +632,82 @@ const en = {
     slideAria: 'Show memory',
     pause: 'Pause slideshow',
     play: 'Resume slideshow',
+  },
+
+  // ── History page (full "Our Story" narrative) ──
+  historyPage: {
+    metaTitle: 'Our History',
+    eyebrow: 'Est. 1993 · Our Journey',
+    titleLine1: 'Our',
+    titleAccent: 'Story',
+    sub: 'From a small gathering of believers to a multicultural family of faith — the story of how God has grown the International Church of Pretoria.',
+    sections: [
+      {
+        heading: 'How We Began',
+        body: 'The International Church of Pretoria, founded in 1993, was born out of a desire to see lives transformed by the love of Jesus Christ and to create a spiritual home where people from different nations, cultures, and backgrounds could worship, grow, and serve together.',
+      },
+      {
+        heading: 'A Vision Beyond the Walls',
+        body: 'From its early beginnings under the leadership of its Founding Pastor, Pastor Emmanuel Tshilenga Kabala, the church has embraced a vision that goes beyond the walls of the sanctuary. We believe that the Gospel speaks to the whole person and touches every area of life.',
+      },
+      {
+        heading: 'A Holistic Mission',
+        body: 'This conviction has shaped our commitment to holistic mission: proclaiming the Good News of Jesus Christ while also caring for the spiritual, emotional, relational, social, and practical needs of people in our community.',
+      },
+      {
+        heading: 'Who We Are Today',
+        body: 'Today, under the leadership of Pastor Jules Mupenda, the International Church of Pretoria continues to be a welcoming and multicultural family of faith, committed to making Christ known through both word and action. Through worship, discipleship, prayer, fellowship, compassion, and community engagement, we seek to bring hope, restoration, dignity, and transformation to individuals and families across the city of Pretoria.',
+      },
+      {
+        heading: 'Our Heart',
+        body: 'Our heart is to see people encounter Christ, grow in faith, experience genuine community, and become agents of hope and transformation wherever God has placed them.',
+      },
+    ],
+    founder: {
+      eyebrow: 'Legacy & Foundation',
+      name: 'Pastor Dr. Emmanuel Tshilenga',
+      role: 'Founding Pastor',
+      body: [
+        'Pastor Emmanuel Tshilenga is the Founding Pastor of the International Church of Pretoria. Through his vision, faith, and dedication to the work of God, he laid the spiritual foundation upon which the church continues to grow today.',
+        'His pioneering leadership helped establish a multicultural Christian community committed to the Word of God, prayer, fellowship, and service. His contribution remains an important part of the history and legacy of the International Church of Pretoria.',
+      ],
+    },
+    closingStatement: 'At the International Church of Pretoria, everyone has a place, every life matters, and our mission is to serve the whole person with the whole Gospel.',
+    leadershipLabel: 'Pastoral Leadership',
+    leadership: [
+      { years: '1993', name: 'Emmanuel Tshilenga Kabala', role: 'Founding Pastor' },
+      { years: 'Today', name: 'Jules Mupenda', role: 'Senior Pastor', href: '/#pastor-welcome' },
+    ],
+    finalEyebrow: 'Be Part of the Story',
+    finalTitle: 'Join Us This Sunday',
+    finalSub: 'Every story needs a next chapter. Come worship with us and become part of what God is writing at ICP.',
+    finalCtaPrimary: 'Plan Your Visit',
+    finalCtaSecondary: 'Get In Touch',
+  },
+
+  // ── Give / banking details page ────────────────
+  giving: {
+    metaTitle: 'Give',
+    eyebrow: 'Support The Ministry',
+    titleLine1: 'Banking',
+    titleAccent: 'Details',
+    sub: 'Use the details below to give by direct bank transfer — for tithes, offerings, or any gift to ICP.',
+    cardHeading: 'Account Details',
+    labels: {
+      accountHolder: 'Account Holder Name',
+      bank: 'Bank',
+      branchName: 'Branch Name',
+      branchCode: 'Branch Code',
+      accountNumber: 'Account Number',
+    },
+    copy: 'Copy',
+    copied: 'Copied',
+    copyAll: 'Copy All Details',
+    copyAllCopied: 'Details Copied',
+    qrHeading: 'Scan To Save',
+    qrAlt: 'QR code containing the ICP bank account details',
+    qrHint: 'Scan with your phone’s camera or any QR reader to save these details on your phone — handy for entering them into your banking app.',
+    note: 'Online giving is on the way. For now, please use these details for direct bank transfers — reach out via the contact form if you’d like help confirming a gift.',
   },
 
   ///* ── Gallery page (chronological) ─────────────
@@ -658,6 +771,12 @@ const en = {
 
 // * ── FRENCH ──────────────────────────────────────
 const fr = {
+
+  toolbar: {
+    tagline: "L'Église internationale de Pretoria",
+    tbService: 'Services du dimanche · 11 h 00',
+  },
+
   nav: {
     home: 'Accueil',
     about: 'À Propos',
@@ -665,10 +784,11 @@ const fr = {
     announcement: 'Horaires',
     sermons: 'Prédications',
     events: 'Événements',
-    departments: 'Départements',
-    gallery: 'Galerie',
     visit: 'Visiter',
     contact: 'Contact',
+    // departments: 'Départements',
+    // gallery: 'Galerie',
+    give: 'Don',
   },
 
   common: {
@@ -713,6 +833,20 @@ const fr = {
     },
   },
 
+  welcome: {
+    eyebrow: 'Un Mot De Notre Pasteur',
+    titleLine1: 'Pasteur',
+    titleAccent: 'Jules Mupenda',
+    role: 'Pasteur Principal',
+    body: [
+      'Le Pasteur Jules Mupenda est l’actuel Pasteur de l’Église Internationale de Pretoria, apportant une direction et un accompagnement spirituels à la congrégation.',
+      'Animé d’un cœur pour Dieu et pour les hommes, il se consacre à la prédication de la Parole, à la prière, au discipulat, et à l’édification d’une communauté centrée sur Christ où des personnes de nations et d’horizons différents grandissent ensemble dans la foi.',
+      'Sous sa direction, l’église poursuit sa mission : toucher des vies, fortifier les familles et équiper les croyants pour qu’ils accomplissent le dessein que Dieu a pour eux.',
+    ],
+    pullQuote: '« Un cœur pour Dieu, et pour les hommes. »',
+    cta: 'Découvrir Notre Équipe Pastorale',
+  },
+
   ticker: [
     'Service du Dimanche', 'École du Dimanche', 'Service du Mercredi', 'Intercession',
     'Groupes de Cellule', 'Ministère Jeunesse', 'Ministère des Femmes', 'Ministère des Couples',
@@ -720,22 +854,22 @@ const fr = {
   ],
 
   about: {
-    eyebrow: 'Qui Sommes-Nous',
+    eyebrow: 'Notre Histoire',
     titleLine1: 'Une Église',
     titleAccent: 'Voulue par Dieu',
     body: [
-      '**Fondée le 21 novembre 1993** par le Révérend Pasteur Emmanuel Tshilenga Kabala.',
-      'Un foyer spirituel accueillant pour les chrétiens de Pretoria — et de toute l’Afrique.',
-      'Nous marchons main dans la main avec chaque église qui nomme Jésus comme Seigneur, bâtissant **un seul corps à travers de nombreuses traditions**.',
-      'Venez comme vous êtes. Restez en famille.',
+      '**Fondée en 1993** par le Révérend Pasteur Emmanuel Tshilenga Kabala, née du désir de voir des vies transformées par l’amour de Jésus-Christ — un foyer spirituel où des personnes de toute nation, culture et origine pourraient adorer, grandir et servir ensemble.',
+      'De notre pasteur fondateur à notre pasteur actuel, **Jules Mupenda**, une seule conviction nous a portés : l’Évangile parle à la personne tout entière, et non à l’âme seule.',
+      'Aujourd’hui, nous demeurons une famille de foi accueillante et multiculturelle, apportant espoir et transformation aux individus et aux familles à travers Pretoria.',
     ],
-    pullQuote: '« Un foyer spirituel accueillant pour tous ceux qui invoquent le nom de Jésus. »',
+    pullQuote: '« Chacun a sa place. Chaque vie compte. »',
     values: [
+      { title: 'Ministère holistique', desc: 'Nous prenons soin de toute la personne — spirituellement, émotionnellement, physiquement et relationnellement — en Christ.' },
       { title: 'Foi', desc: 'Enracinés dans l’Évangile de Jésus-Christ, nous vivons selon Sa Parole et Le confessons comme Seigneur et Sauveur de tous.' },
       { title: 'Unité', desc: 'Nous accueillons les croyants de toutes les nations, bâtissant une seule famille spirituelle sous Christ dans l’amour et l’harmonie.' },
       { title: 'Transformation', desc: 'Engagés dans la croissance spirituelle et le renouveau par l’adoration, l’enseignement et la puissance du Saint-Esprit.' },
     ],
-    cta: 'Nous Contacter',
+    cta: 'Découvrir Notre Histoire',
     badgeNum: '33+',
     badgeLabel: 'Années de Grâce',
   },
@@ -783,7 +917,7 @@ const fr = {
             id: 'wednesday',
             icon: SPROUT_ICON,
             name: 'Service du Mercredi',
-            when: '1ᵉʳ mercredi du mois',
+            when: '1ᵉʳ mercredi du mois \n de 18:00 à 19:30',
           },
           {
             id: 'intercession',
@@ -795,8 +929,8 @@ const fr = {
             id: 'choir',
             icon: MIC_VOCAL_ICON,
             name: 'Chorale',
-            when: 'Samedi · 15:00 – 18:00',
-            extra: 'Mercredi · 17:00 – 19:30 (sauf 1ᵉʳ mercredi)',
+            when: 'Samedi · 15:00 – 19:30',
+            // extra: 'Mercredi · 17:00 – 19:30 (sauf 1ᵉʳ mercredi)',
           },
         ],
       },
@@ -856,13 +990,28 @@ const fr = {
           {
             id: 'couples',
             icon: HEART_HANDSHAKE_ICON,
-            name: 'Ministère des Couples',
+            name: 'Ministère des couples et de la famille',
             when: 'Session mensuelle',
             extra: 'Ateliers / Retraites trimestrielles',
           },
         ],
       },
     ],
+  },
+
+  team: {
+    eyebrow: 'Direction Pastorale',
+    titleLine1: 'Équipe',
+    titleAccent: 'Pastorale',
+  },
+
+  appointment: {
+    eyebrow: 'Rendez-Vous Individuel',
+    title: 'Rendez-Vous Avec Le Pasteur',
+    schedule: 'Les mercredis à partir de 18h00',
+    callCta: 'Appeler Pour Réserver',
+    copyNumber: 'Copier le numéro',
+    copied: 'Numéro copié',
   },
 
   sermons: {
@@ -1011,44 +1160,42 @@ const fr = {
     offlineRetry: 'Réessayer',
   },
 
-  // contact: {
-  //   eyebrow: 'Nous Trouver',
-  //   titleLine1: 'Venez',
-  //   titleAccent: 'Adorer Avec Nous',
-  //   items: [
-  //     { icon: '📍', label: 'Emplacement',         value: '294 Flowers Street\nCapital Park, Pretoria, 0084' },
-  //     { icon: '🕐', label: 'Services du Dimanche', value: 'Intercession : 07:30\nService Principal : 09:00' },
-  //     { icon: '📅', label: 'Service du Mercredi',  value: 'Tous les mercredis soir' },
-  //     { icon: '✉️', label: 'Email',                value: 'info@icpretoria.org' },
-  //   ],
-  //   formEyebrow: 'Écrivez-Nous',
-  //   formTitleLine1: 'Nous serions ravis',
-  //   formTitleAccent: 'd’avoir de vos nouvelles',
-  //   fields: {
-  //     firstName: 'Prénom',
-  //     firstNamePh: 'Jean',
-  //     firstNameError: 'Le prénom est requis',
-  //     lastName: 'Nom',
-  //     lastNamePh: 'Dupont',
-  //     lastNameError: 'Le nom est requis',
-  //     email: 'Adresse E-mail',
-  //     emailPh: 'jean@exemple.com',
-  //     emailErrorRequired: 'L’email est requis',
-  //     emailErrorInvalid: 'Veuillez saisir un email valide',
-  //     subject: 'Sujet',
-  //     subjectPh: 'Comment pouvons-nous aider ?',
-  //     subjectError: 'Veuillez ajouter un sujet',
-  //     message: 'Message',
-  //     messagePh: 'Saisissez votre message…',
-  //     messageError: 'Veuillez écrire votre message',
-  //   },
-  //   submit: 'Envoyer le Message',
-  //   successMsg: 'Merci ! Votre message a été envoyé. Nous vous contacterons bientôt.',
-  //   errorMsg: 'Veuillez corriger les champs en surbrillance et réessayer.',
-  //   notePrefix: 'Préférez l’email ? Écrivez à ',
-  //   noteEmail: 'info@icpretoria.org',
-  //   notePostfix: '.',
-  // },
+  contact: {
+    eyebrow: 'Venez Comme Vous Êtes',
+    titleLine1: 'Vous Avez',
+    titleAccent: 'Déjà Votre Place',
+    quote: '« Chaque message trouve son chemin vers quelqu’un qui s’en soucie. Écrivez-nous — nous serions ravis de connaître votre histoire. »',
+    quoteAttribution: 'L’équipe pastorale de l’ICP',
+    formEyebrow: 'Écrivez-Nous',
+    formTitleLine1: 'Nous serions ravis',
+    formTitleAccent: 'd’avoir de vos nouvelles',
+    fields: {
+      firstName: 'Prénom',
+      firstNamePh: 'Jean',
+      firstNameError: 'Le prénom est requis',
+      lastName: 'Nom',
+      lastNamePh: 'Dupont',
+      lastNameError: 'Le nom est requis',
+      email: 'Adresse E-mail',
+      emailPh: 'jean@exemple.com',
+      emailErrorRequired: 'L’email est requis',
+      emailErrorInvalid: 'Veuillez saisir un email valide',
+      subject: 'Sujet',
+      subjectPh: 'Comment pouvons-nous aider ?',
+      subjectError: 'Veuillez ajouter un sujet',
+      message: 'Message',
+      messagePh: 'Saisissez votre message…',
+      messageError: 'Veuillez écrire votre message',
+    },
+    submit: 'Envoyer le Message',
+    successMsg: 'Merci ! Votre message a été envoyé. Nous vous contacterons bientôt.',
+    fallbackSuccessMsg: 'Votre application e-mail devrait maintenant s’ouvrir avec le message prêt à être envoyé. Si ce n’est pas le cas, écrivez-nous directement ci-dessous.',
+    errorMsg: 'Veuillez corriger les champs en surbrillance et réessayer.',
+    submitErrorMsg: 'Une erreur s’est produite lors de l’envoi de votre message. Veuillez réessayer, ou écrivez-nous directement ci-dessous.',
+    notePrefix: 'Préférez l’email ? Écrivez à ',
+    noteEmail: 'icpeip012@gmail.com',
+    notePostfix: '.',
+  },
 
   footer: {
     brandName: 'ICP',
@@ -1061,9 +1208,11 @@ const fr = {
         title: 'Autres Pages',
         links: [
           { label: 'Départements', href: '/departments', type: 'route' },
+          { label: 'Histoire', href: '/history', type: 'route' },
           { label: 'Galerie', href: '/gallery', type: 'route' },
-          { label: 'Prédications', href: '/#sermons', type: 'hash' },
-          { label: 'Événements', href: '/#events', type: 'hash' },
+          { label: 'Don', href: '/give', type: 'route' },
+          // { label: 'Prédications', href: '/#sermons', type: 'hash' },
+          // { label: 'Événements', href: '/#events', type: 'hash' },
         ],
       },
       {
@@ -1099,7 +1248,8 @@ const fr = {
         icon: MIC_VOCAL_ICON,
         title: 'Chorale',
         description: 'Les voix et instruments qui dirigent l’adoration chaque dimanche et mercredi. Apportez votre voix ou votre instrument — les deux sont les bienvenus.',
-        schedule: 'Samedis · 15:00 – 18:00\nMercredis · 17:00 – 19:30 (sauf 1ᵉʳ mercredi du mois)',
+        // schedule: 'Samedis · 15:00 – 18:00\nMercredis · 17:00 – 19:30 (sauf 1ᵉʳ mercredi du mois)',
+        schedule: 'Samedis · 15:00 – 19:30',
       },
       {
         id: 'soundMedia',
@@ -1124,8 +1274,8 @@ const fr = {
       {
         id: 'couples',
         icon: HEART_HANDSHAKE_ICON,
-        title: 'Couples',
-        description: 'Renforcer les mariages par les Écritures, le mentorat et la conversation honnête.',
+        title: 'Couples et famille',
+        description: 'Fortifier les couples et les familles à travers les écritures, le mentorat, des échanges enrichissants et des conversations sincères.',
         schedule: 'Session mensuelle · ateliers trimestriels',
       },
       {
@@ -1181,6 +1331,81 @@ const fr = {
     slideAria: 'Afficher le souvenir',
     pause: 'Mettre le diaporama en pause',
     play: 'Reprendre le diaporama',
+  },
+
+  // ── Page Histoire (récit complet « Notre Histoire ») ──
+  historyPage: {
+    metaTitle: 'Notre Histoire',
+    eyebrow: 'Fondée en 1993 · Notre Parcours',
+    titleLine1: 'Notre',
+    titleAccent: 'Histoire',
+    sub: 'D’un petit rassemblement de croyants à une famille de foi multiculturelle — l’histoire de la façon dont Dieu a fait grandir l’Église Internationale de Pretoria.',
+    sections: [
+      {
+        heading: 'Nos Débuts',
+        body: 'L’Église Internationale de Pretoria, fondée en 1993, est née du désir de voir des vies transformées par l’amour de Jésus-Christ et de créer un foyer spirituel où des personnes de nations, cultures et origines différentes pourraient adorer, grandir et servir ensemble.',
+      },
+      {
+        heading: 'Une Vision au-delà des Murs',
+        body: 'Dès ses débuts, sous la direction de son Pasteur Fondateur, le Pasteur Emmanuel Tshilenga Kabala, l’église a embrassé une vision qui dépasse les murs du sanctuaire. Nous croyons que l’Évangile parle à la personne tout entière et touche chaque domaine de la vie.',
+      },
+      {
+        heading: 'Une Mission Holistique',
+        body: 'Cette conviction a façonné notre engagement envers une mission holistique : proclamer la Bonne Nouvelle de Jésus-Christ tout en prenant soin des besoins spirituels, émotionnels, relationnels, sociaux et pratiques des personnes de notre communauté.',
+      },
+      {
+        heading: 'Qui Nous Sommes Aujourd’hui',
+        body: 'Aujourd’hui, sous la direction du Pasteur Jules Mupenda, l’Église Internationale de Pretoria continue d’être une famille de foi accueillante et multiculturelle, engagée à faire connaître Christ en parole et en actes. Par le culte, le discipulat, la prière, la communion fraternelle, la compassion et l’engagement communautaire, nous cherchons à apporter espoir, restauration, dignité et transformation aux individus et aux familles à travers la ville de Pretoria.',
+      },
+      {
+        heading: 'Notre Cœur',
+        body: 'Notre cœur est de voir des personnes rencontrer Christ, grandir dans la foi, vivre une communauté authentique, et devenir des agents d’espoir et de transformation là où Dieu les a placées.',
+      },
+    ],
+    founder: {
+      eyebrow: 'Héritage & Fondation',
+      name: 'Pasteur Dr. Emmanuel Tshilenga',
+      role: 'Pasteur Fondateur',
+      body: [
+        'Le Pasteur Emmanuel Tshilenga est le Pasteur Fondateur de l’Église Internationale de Pretoria. Par sa vision, sa foi et son dévouement à l’œuvre de Dieu, il a posé le fondement spirituel sur lequel l’église continue de grandir aujourd’hui.',
+        'Son leadership pionnier a permis d’établir une communauté chrétienne multiculturelle attachée à la Parole de Dieu, à la prière, à la communion fraternelle et au service. Sa contribution demeure une part importante de l’histoire et de l’héritage de l’Église Internationale de Pretoria.',
+      ],
+    },
+    closingStatement: 'À l’Église Internationale de Pretoria, chacun a sa place, chaque vie compte, et notre mission est de servir la personne tout entière avec l’Évangile tout entier.',
+    leadershipLabel: 'Direction Pastorale',
+    leadership: [
+      { years: '1993', name: 'Emmanuel Tshilenga Kabala', role: 'Pasteur Fondateur' },
+      { years: 'Aujourd’hui', name: 'Jules Mupenda', role: 'Pasteur Principal', href: '/#pastor-welcome' },
+    ],
+    finalEyebrow: 'Faites Partie de l’Histoire',
+    finalTitle: 'Rejoignez-Nous Ce Dimanche',
+    finalSub: 'Chaque histoire a besoin d’un prochain chapitre. Venez adorer avec nous et faites partie de ce que Dieu écrit à l’ICP.',
+    finalCtaPrimary: 'Planifiez Votre Visite',
+    finalCtaSecondary: 'Nous Contacter',
+  },
+
+  giving: {
+    metaTitle: 'Don',
+    eyebrow: 'Soutenir Le Ministère',
+    titleLine1: 'Coordonnées',
+    titleAccent: 'Bancaires',
+    sub: 'Utilisez les coordonnées ci-dessous pour donner par virement bancaire — pour la dîme, les offrandes, ou tout don à l’ICP.',
+    cardHeading: 'Détails du Compte',
+    labels: {
+      accountHolder: 'Nom du Titulaire',
+      bank: 'Banque',
+      branchName: 'Nom de l’Agence',
+      branchCode: 'Code d’Agence',
+      accountNumber: 'Numéro de Compte',
+    },
+    copy: 'Copier',
+    copied: 'Copié',
+    copyAll: 'Copier Tous les Détails',
+    copyAllCopied: 'Détails Copiés',
+    qrHeading: 'Scanner Pour Enregistrer',
+    qrAlt: 'Code QR contenant les coordonnées bancaires de l’ICP',
+    qrHint: 'Scannez avec l’appareil photo de votre téléphone ou tout lecteur QR pour enregistrer ces coordonnées — pratique pour les saisir dans votre application bancaire.',
+    note: 'Le don en ligne arrive bientôt. En attendant, veuillez utiliser ces coordonnées pour un virement bancaire direct — contactez-nous via le formulaire si vous souhaitez de l’aide pour confirmer un don.',
   },
 
   galleryPage: {

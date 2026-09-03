@@ -60,7 +60,7 @@
       rgba(26, 216, 216, 0.12) 0%,
       transparent 65%
     ),
-    url('../../../assets/images/Hero-Images/1.png') center / cover no-repeat;
+    url('../../../assets/images/Hero-Images/1.gif') center / cover no-repeat;
 }
 
 .dept-hero__inner {
@@ -75,6 +75,7 @@
   @include eyebrow;
   @include reveal-base;
   justify-content: center;
+  color: rgba(255, 255, 255, 0.92);
   // Cyan-on-dark already reads well; no override needed.
 
   &::after {

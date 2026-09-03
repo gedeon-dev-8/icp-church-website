@@ -4,11 +4,15 @@ import Ticker from '../../sections/Ticker/Ticker';
 import Gallery from '../../sections/Gallery/Gallery';
 import Scripture from '../../sections/Scripture/Scripture';
 import Announcement from '../../sections/Announcement/Announcement';
+import PastoralTeam from '../../sections/PastoralTeam/PastoralTeam';
+import PastorAppointment from '../../sections/PastorAppointment/PastorAppointment';
 import Sermons from '../../sections/Sermons/Sermons';
 import Events from '../../sections/Events/Events';
 import Map from '../../sections/Map/Map';
 import Stats from '../../sections/Stats/Stats';
 import Divider from '../../layout/Divider/Divider';
+import Contact from '../../sections/Contact/Contact';
+import PastorWelcome from '../../sections/PastorWelcome/PastorWelcome';
 
 // ────────────────────────────────────────────────────────────────────
 // Home page composition.
@@ -23,10 +27,13 @@ const Home = () => {
     <main id="main" tabIndex="-1">
       <Hero />
       <Ticker />
+      <PastorWelcome />
       <About />
       <Stats />
       <Divider variant="cross" />
       <Announcement />
+      <PastoralTeam />
+      <PastorAppointment />
       <Sermons />
       <Divider variant="dot" />
       <Events />
@@ -35,6 +42,7 @@ const Home = () => {
       <Scripture />
       <Divider variant="flame" />
       <Map />
+      <Contact />
     </main>
   );
 };

@@ -1,12 +1,13 @@
 import { useScrollReveal } from '../../../hooks/useScrollReveal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCross, faUsers, faLeaf } from '@fortawesome/free-solid-svg-icons';
+import { faCross, faUsers, faLeaf, faHandsHoldingCircle } from '@fortawesome/free-solid-svg-icons';
 import { useLang } from '../../../context/LanguageContext';
 import AnimatedYears from '../../shared/AnimatedYears';
+import SmartNavLink from '../../layout/Navbar/SmartNavLink';
 
 import './About.scss';
 
-const VALUE_ICONS = [faCross, faUsers, faLeaf];
+const VALUE_ICONS = [faHandsHoldingCircle, faCross, faUsers, faLeaf];
 
 function Reveal({ children, className = '', delay = 0 }) {
   const { ref, visible } = useScrollReveal();
@@ -97,11 +98,10 @@ export default function About() {
         </Reveal>
 
         <Reveal delay={0.4}>
-          {/* Contact section was removed — open the user's mail client directly. */}
-          <a href="mailto:info@icpretoria.org" className="about__cta">
+          <SmartNavLink href="/history" className="about__cta">
             <span>{t('about.cta')}</span>
             <span aria-hidden="true">→</span>
-          </a>
+          </SmartNavLink>
         </Reveal>
       </div>
     </section>

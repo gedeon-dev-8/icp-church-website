@@ -3,7 +3,10 @@
 
 .nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  // top: 0; left: 0; right: 0;
+  top: 34px;
+  left: 0;
+  right: 0;
   z-index: 500;
   display: flex;
   align-items: center;
@@ -19,19 +22,25 @@
     padding: 0.9rem 4rem;
     box-shadow: var(--shadow);
 
-    .nav__link{
+    .nav__link {
       font-weight: normal;
     }
   }
 
   @include respond($bp-lg) {
     padding: 1.4rem 2.5rem;
-    &--scrolled { padding: 0.9rem 2.5rem; }
+
+    &--scrolled {
+      padding: 0.9rem 2.5rem;
+    }
   }
 
   @include respond($bp-md) {
     padding: 1.1rem 1.5rem;
-    &--scrolled { padding: 1rem 1.5rem; }
+
+    &--scrolled {
+      padding: 1rem 1.5rem;
+    }
   }
 }
 
@@ -51,7 +60,9 @@
   box-shadow: 0 0 14px rgba(26, 216, 216, 0.22);
   transition: box-shadow 0.3s;
 
-  &:hover { box-shadow: 0 0 22px rgba(26, 216, 216, 0.40); }
+  &:hover {
+    box-shadow: 0 0 22px rgba(26, 216, 216, 0.40);
+  }
 }
 
 .nav__links {
@@ -60,7 +71,9 @@
   gap: 2.5rem;
   list-style: none;
 
-  @include respond($bp-md) { display: none; }
+  @include respond($bp-md) {
+    display: none;
+  }
 }
 
 .nav__link {
@@ -75,7 +88,9 @@
   font-weight: 600;
 
   // Once the nav becomes solid (scrolled state), use theme text color
-  .nav--scrolled & { color: var(--text); }
+  .nav--scrolled & {
+    color: var(--text);
+  }
 
   [data-theme='light'] & {
     color: rgba(13, 43, 43, 0.85);
@@ -85,16 +100,25 @@
   &--active {
     color: var(--cyan);
 
-    &::after { transform: scaleX(1); }
+    &::after {
+      transform: scaleX(1);
+    }
 
-    .nav--scrolled & { color: var(--cyan); }
-    [data-theme='light'] & { color: var(--cyan-deep); }
+    .nav--scrolled & {
+      color: var(--cyan);
+    }
+
+    [data-theme='light'] & {
+      color: var(--cyan-deep);
+    }
   }
 
   &::after {
     content: '';
     position: absolute;
-    bottom: -3px; left: 0; right: 0;
+    bottom: -3px;
+    left: 0;
+    right: 0;
     height: 1px;
     background: var(--cyan);
     transform: scaleX(0);
@@ -104,8 +128,36 @@
 
   &:hover {
     color: var(--cyan);
-    &::after { transform: scaleX(1); }
+
+    &::after {
+      transform: scaleX(1);
+    }
   }
+
+  // ── Page-specific colour overrides ──────────────────────────
+  body[data-page='giving'] &,
+  body[data-page='gallery'] &,
+  body[data-page='departments'] &,
+  body[data-page='history'] & {
+    color: rgba(255, 255, 255, 0.88);
+
+    &:hover {
+      color: var(--cyan);
+    }
+
+    &--active {
+      color: var(--cyan);
+    }
+  }
+}
+
+// Scrolled override for gallery/departments — kept as a separate,
+// flat rule (NOT nested in .nav__link) so the ancestor order is correct.
+body[data-page='giving'] .nav--scrolled .nav__link,
+body[data-page='gallery'] .nav--scrolled .nav__link,
+body[data-page='departments'] .nav--scrolled .nav__link,
+body[data-page='history'] .nav--scrolled .nav__link {
+  color: var(--text);
 }
 
 .nav__right {
@@ -138,7 +190,21 @@
 
   .nav__lang-opt {
     transition: color 0.25s;
-    &.is-active { color: var(--cyan); }
+
+    body[data-page='giving'] &,
+    body[data-page='gallery'] &,
+    body[data-page='departments'] &,
+    body[data-page='history'] & {
+      color: #ffffff;
+
+      &.is-active {
+        color: var(--cyan);
+      }
+    }
+
+    &.is-active {
+      color: var(--cyan);
+    }
   }
 
   .nav__lang-divider {
@@ -146,7 +212,18 @@
     opacity: 0.5;
   }
 
-  @include respond($bp-md) { display: none; }
+  @include respond($bp-md) {
+    display: none;
+  }
+}
+
+// Scrolled override for gallery/departments — kept as a separate,
+// flat rule (NOT nested in .nav__link) so the ancestor order is correct.
+body[data-page='giving'] .nav--scrolled .nav__lang-opt,
+body[data-page='gallery'] .nav--scrolled .nav__lang-opt,
+body[data-page='departments'] .nav--scrolled .nav__lang-opt,
+body[data-page='history'] .nav--scrolled .nav__lang-opt {
+  color: var(--text-dim);
 }
 
 .nav__toggle {
@@ -177,12 +254,26 @@
   transition: opacity 0.3s, transform 0.3s;
   line-height: 1;
 
-  &--dark  { opacity: 1; transform: scale(1); }
-  &--light { opacity: 0; transform: scale(0.5); }
+  &--dark {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &--light {
+    opacity: 0;
+    transform: scale(0.5);
+  }
 
   [data-theme='light'] & {
-    &--dark  { opacity: 0; transform: scale(0.5); }
-    &--light { opacity: 1; transform: scale(1); }
+    &--dark {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+
+    &--light {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
 
@@ -205,10 +296,21 @@
   }
 
   &--open {
-    span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
   }
 
-  @include respond($bp-md) { display: flex; }
+  @include respond($bp-md) {
+    display: flex;
+  }
 }

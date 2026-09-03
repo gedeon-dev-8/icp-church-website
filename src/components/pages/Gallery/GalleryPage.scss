@@ -39,7 +39,7 @@
   inset: 0;
   z-index: 0;
   background:
-    url('../../../assets/images/Hero-Images/1.png') center / cover no-repeat;
+    url('../../../assets/images/Hero-Images/1.gif') center / cover no-repeat;
   transform: scale(1.06);
   animation: gpHeroKen 22s ease-in-out infinite alternate;
   @include photo-warmth(0.92);
@@ -139,7 +139,8 @@
 
 .gp-hero__title-line {
   font-size: clamp(2rem, 4.6vw, 3.6rem);
-  color: var(--heading);
+  // color: var(--heading);color: 
+  color: rgba(255, 255, 255, 0.92);
   letter-spacing: 0.02em;
 }
 

@@ -12,6 +12,7 @@ import RouteScrollManager from './components/layout/RouteScrollManager/RouteScro
 import PageLoader from './components/layout/PageLoader/PageLoader';
 import NextServiceBanner from './components/layout/NextServiceBanner/NextServiceBanner';
 import RouteLoader from './components/layout/RouteLoader/RouteLoader';
+import Toolbar from './components/layout/Toolbar/Toolbar';
 
 // Home is the entry point — keep it eagerly imported so the first
 // paint isn't gated on a chunk fetch.
@@ -23,18 +24,23 @@ import Home from './components/pages/Home/Home';
 // Suspense shows RouteLoader while the chunk arrives.
 const GalleryPage     = lazy(() => import('./components/pages/Gallery/GalleryPage'));
 const DepartmentsPage = lazy(() => import('./components/pages/Departments/DepartmentsPage'));
+const GivingPage      = lazy(() => import('./components/pages/Giving/GivingPage'));
+const HistoryPage     = lazy(() => import('./components/pages/History/HistoryPage'));
 const NotFound        = lazy(() => import('./components/pages/NotFound/NotFound'));
 
 const AppInner = () => (
   <BrowserRouter>
     <RouteScrollManager />
     <NextServiceBanner />
+    <Toolbar />
     <Navbar />
     <Suspense fallback={<RouteLoader />}>
       <Routes>
         <Route path="/"            element={<Home />} />
         <Route path="/departments" element={<DepartmentsPage />} />
         <Route path="/gallery"     element={<GalleryPage />} />
+        <Route path="/give"        element={<GivingPage />} />
+        <Route path="/history"     element={<HistoryPage />} />
         <Route path="*"            element={<NotFound />} />
       </Routes>
     </Suspense>

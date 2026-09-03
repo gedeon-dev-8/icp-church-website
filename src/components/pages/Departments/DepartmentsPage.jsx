@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { usePageTheme } from '../../../hooks/usePageTheme';
 import { useScrollReveal } from '../../../hooks/useScrollReveal';
 import { useLang } from '../../../context/LanguageContext';
 import SmartNavLink from '../../layout/Navbar/SmartNavLink';
@@ -61,6 +62,8 @@ export default function DepartmentsPage() {
   const items = t('departmentsPage.items') || [];
   const scheduleLabel = t('departmentsPage.scheduleLabel');
 
+  usePageTheme('departments');
+
   return (
     <main id="main" tabIndex="-1" className="departments-page">
       {/* ── Hero header ── */}
@@ -105,7 +108,7 @@ export default function DepartmentsPage() {
               <span>{t('departmentsPage.finalCtaPrimary')}</span>
               <span aria-hidden="true">→</span>
             </SmartNavLink>
-            <a href="mailto:info@icpretoria.org" className="dept-final__btn dept-final__btn--ghost">
+            <a href="mailto:icpeip012@gmail.com" className="dept-final__btn dept-final__btn--ghost">
               {t('departmentsPage.finalCtaSecondary')}
             </a>
           </Reveal>

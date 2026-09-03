@@ -1,0 +1,60 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.social-toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 501;
+  height: 34px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4rem;
+  background: var(--toolbar-bg);
+  border-bottom: 1px solid rgba(0,249,249,0.08);
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.social-toolbar.hidden { transform: translateY(-100%); }
+ 
+.tb-left {
+  display: flex; align-items: center; gap: 6px;
+}
+.tb-tagline {
+  font-family: var(--ff-cinzel);
+  font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--tb-tagline);
+  white-space: nowrap;
+}
+.tb-divider {
+  width: 1px; height: 12px;
+  background: var(--tb-divider);
+  margin: 0 8px;
+}
+ 
+.tb-socials {
+  display: flex; align-items: center; gap: 2px;
+}
+.tb-social {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--tb-social);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.25s, background 0.25s;
+  flex-shrink: 0;
+}
+.tb-social:hover { color: var(--toolbar-main); background: var(--tb-social-hover); }
+.tb-social svg { display: block; }
+ 
+.tb-right {
+  display: flex; align-items: center; gap: 14px;
+}
+.tb-service {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--tb-service);
+  white-space: nowrap;
+}
+.tb-service-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--toolbar-main); flex-shrink: 0;
+  animation: tbPulse 2s ease-in-out infinite;
+  margin-bottom: 0.11rem;
+}
+@keyframes tbPulse { 0%,100%{opacity:1}50%{opacity:.35} }

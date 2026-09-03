@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useScrollReveal } from '../../../hooks/useScrollReveal';
 import { useLang } from '../../../context/LanguageContext';
+import { usePageTheme } from '../../../hooks/usePageTheme';
 import SmartNavLink from '../../layout/Navbar/SmartNavLink';
 import MemoryLane from '../../sections/MemoryLane/MemoryLane';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -425,9 +426,9 @@ function Lightbox({ items, index, onClose, onPrev, onNext, t, categoryMeta }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────
-// Main page
-// ─────────────────────────────────────────────────────────────────────
+// * ─────────────────────────────────────────────────────────────────────
+// * Main page
+// * ─────────────────────────────────────────────────────────────────────
 export default function GalleryPage() {
   const { t } = useLang();
   const [openIdx, setOpenIdx] = useState(null);
@@ -483,6 +484,8 @@ export default function GalleryPage() {
 
   const categoryMeta = t('galleryPage.categories') || {};
   const photosLabel = t('galleryPage.photosLabel') || 'photos';
+
+  usePageTheme('gallery');
 
   return (
     <main id="main" tabIndex="-1" className="gallery-page">

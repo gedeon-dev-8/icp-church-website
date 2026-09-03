@@ -6,8 +6,13 @@
   background: var(--bg2);
   transition: background 0.45s;
 
-  @include respond($bp-lg) { padding: $section-pad-md; }
-  @include respond($bp-md) { padding: $section-pad-sm; }
+  @include respond($bp-lg) {
+    padding: $section-pad-md;
+  }
+
+  @include respond($bp-md) {
+    padding: $section-pad-sm;
+  }
 }
 
 // ── Header ──────────────────────────────────
@@ -29,6 +34,15 @@
 .gallery__eyebrow {
   @include eyebrow;
   @include reveal-base;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
 }
 
 .gallery__title {
@@ -47,8 +61,14 @@
   line-height: 1.6;
 }
 
-.gallery__cta-wrap { @include reveal-base; align-self: flex-end; }
-.gallery__cta { @include btn-ghost; }
+.gallery__cta-wrap {
+  @include reveal-base;
+  align-self: flex-end;
+}
+
+.gallery__cta {
+  @include btn-ghost;
+}
 
 // ──────────────────────────────────────────────
 // BENTO GRID — 4 cols × 3 rows
@@ -109,12 +129,24 @@
 
   &:hover,
   &:focus-visible {
-    .gh-tile__img    { transform: scale(1.06); filter: brightness(1) saturate(1.1); }
-    .gh-tile__overlay { opacity: 1; }
-    .gh-tile__view    { transform: translateX(0); opacity: 1; }
+    .gh-tile__img {
+      transform: scale(1.06);
+      filter: brightness(1) saturate(1.1);
+    }
+
+    .gh-tile__overlay {
+      opacity: 1;
+    }
+
+    .gh-tile__view {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 
-  &:focus-visible { outline-offset: -2px; }
+  &:focus-visible {
+    outline-offset: -2px;
+  }
 }
 
 // Image inside a tile — unified warmth treatment lives in _mixins.scss
@@ -136,10 +168,9 @@
   align-items: flex-end;
   justify-content: space-between;
   background: linear-gradient(to top,
-    rgba(5, 10, 10, 0.88) 0%,
-    rgba(5, 10, 10, 0.20) 45%,
-    transparent 75%
-  );
+      rgba(5, 10, 10, 0.88) 0%,
+      rgba(5, 10, 10, 0.20) 45%,
+      transparent 75%);
   opacity: 0;
   transition: opacity 0.4s;
   pointer-events: none;
@@ -172,15 +203,14 @@
   .gh-tile__overlay {
     opacity: 1;
     background: linear-gradient(to top,
-      rgba(5, 10, 10, 0.55) 0%,
-      rgba(5, 10, 10, 0) 50%
-    );
+        rgba(5, 10, 10, 0.55) 0%,
+        rgba(5, 10, 10, 0) 50%);
   }
+
   &:hover .gh-tile__overlay {
     background: linear-gradient(to top,
-      rgba(5, 10, 10, 0.85) 0%,
-      rgba(5, 10, 10, 0.20) 50%
-    );
+        rgba(5, 10, 10, 0.85) 0%,
+        rgba(5, 10, 10, 0.20) 50%);
   }
 }
 
@@ -189,8 +219,13 @@
   background: #000;
 
   &:hover {
-    .gh-tile__video    { transform: scale(1.04); }
-    .gh-tile__overlay--video { opacity: 1; }
+    .gh-tile__video {
+      transform: scale(1.04);
+    }
+
+    .gh-tile__overlay--video {
+      opacity: 1;
+    }
   }
 }
 
@@ -206,10 +241,9 @@
 .gh-tile__overlay--video {
   opacity: 1; // always visible
   background: linear-gradient(to top,
-    rgba(5, 10, 10, 0.78) 0%,
-    rgba(5, 10, 10, 0.18) 45%,
-    transparent 80%
-  );
+      rgba(5, 10, 10, 0.78) 0%,
+      rgba(5, 10, 10, 0.18) 45%,
+      transparent 80%);
   align-items: flex-end;
   flex-direction: column;
   align-items: stretch;
@@ -245,8 +279,17 @@
 }
 
 @keyframes ghLiveDot {
-  0%, 100% { opacity: 1; transform: scale(1);    }
-  50%      { opacity: 0.5; transform: scale(0.8); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
 }
 
 // ── Stat / CTA tile ─────────────────────────
@@ -268,8 +311,10 @@
   &::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 140px; height: 140px;
+    top: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%);
     pointer-events: none;
@@ -282,13 +327,21 @@
     transform: translateY(-3px);
     box-shadow: 0 12px 32px rgba(13, 148, 148, 0.18);
 
-    &::before { transform: scale(1.4) translate(-10px, 10px); }
-    .gh-tile__stat-cta { gap: 0.8rem; color: var(--cyan); }
+    &::before {
+      transform: scale(1.4) translate(-10px, 10px);
+    }
+
+    .gh-tile__stat-cta {
+      gap: 0.8rem;
+      color: var(--cyan);
+    }
   }
 
   // Override hover-overlay rules from the base tile
   .gh-tile__img,
-  .gh-tile__overlay { display: none; }
+  .gh-tile__overlay {
+    display: none;
+  }
 }
 
 .gh-tile__stat-num {
@@ -327,7 +380,9 @@
   position: relative;
   z-index: 1;
 
-  span:last-child { color: var(--cyan); }
+  span:last-child {
+    color: var(--cyan);
+  }
 }
 
 // ──────────────────────────────────────────────
@@ -339,26 +394,24 @@
   overflow: hidden;
   width: 100%;
   // Soft fade on the edges so photos drift in/out gracefully
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    #000 6%,
-    #000 94%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    #000 6%,
-    #000 94%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      #000 6%,
+      #000 94%,
+      transparent 100%);
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      #000 6%,
+      #000 94%,
+      transparent 100%);
 
   @include reveal-base;
 
   // Pause on hover so users can interact with a tile
   &:hover .gh-marquee__track,
-  &:focus-within .gh-marquee__track { animation-play-state: paused; }
+  &:focus-within .gh-marquee__track {
+    animation-play-state: paused;
+  }
 }
 
 .gh-marquee__track {
@@ -370,8 +423,13 @@
 }
 
 @keyframes ghMarquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .gh-marquee__item {
@@ -403,7 +461,10 @@
   }
 
   &:hover .gh-marquee__label,
-  &:focus-visible .gh-marquee__label { opacity: 1; transform: translateY(0); }
+  &:focus-visible .gh-marquee__label {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   @include respond($bp-md) {
     width: 170px;
@@ -413,12 +474,13 @@
 
 .gh-marquee__label {
   position: absolute;
-  left: 0; right: 0; bottom: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 0.7rem 0.8rem;
   background: linear-gradient(to top,
-    rgba(5, 10, 10, 0.88) 0%,
-    transparent 100%
-  );
+      rgba(5, 10, 10, 0.88) 0%,
+      transparent 100%);
   font-family: $font-cinzel;
   font-size: 0.55rem;
   letter-spacing: 0.22em;
@@ -432,11 +494,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gh-marquee__track { animation: none; }
-  .gh-tile__live-dot { animation: none; }
+  .gh-marquee__track {
+    animation: none;
+  }
+
+  .gh-tile__live-dot {
+    animation: none;
+  }
+
   .gh-tile__img,
   .gh-tile__video,
-  .gh-marquee__item img { transition: none; }
+  .gh-marquee__item img {
+    transition: none;
+  }
 }
 
 // ──────────────────────────────────────────────
@@ -454,7 +524,9 @@
   margin-bottom: 1.4rem;
   padding: 0 0.4rem;
 
-  @include respond($bp-md) { gap: 0.8rem; }
+  @include respond($bp-md) {
+    gap: 0.8rem;
+  }
 }
 
 .gh-years__line {
@@ -480,8 +552,13 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 
-  @include respond($bp-lg) { grid-template-columns: repeat(2, 1fr); }
-  @include respond($bp-sm) { grid-template-columns: 1fr; }
+  @include respond($bp-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond($bp-sm) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .gh-year-wrap {
@@ -515,10 +592,9 @@
 
     .gh-year__veil {
       background: linear-gradient(to top,
-        rgba(5, 10, 10, 0.92) 0%,
-        rgba(5, 10, 10, 0.45) 65%,
-        rgba(5, 10, 10, 0.20) 100%
-      );
+          rgba(5, 10, 10, 0.92) 0%,
+          rgba(5, 10, 10, 0.45) 65%,
+          rgba(5, 10, 10, 0.20) 100%);
     }
 
     .gh-year__arrow {
@@ -526,10 +602,15 @@
       opacity: 1;
     }
 
-    .gh-year__num { color: var(--cyan); }
+    .gh-year__num {
+      color: var(--cyan);
+    }
   }
 
-  @include respond($bp-md) { height: 110px; padding: 1rem 1.1rem; }
+  @include respond($bp-md) {
+    height: 110px;
+    padding: 1rem 1.1rem;
+  }
 }
 
 .gh-year__bg {
@@ -541,26 +622,26 @@
   filter: brightness(0.62) saturate(0.92) contrast(1.04);
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s;
 
-  [data-theme='light'] & { filter: brightness(0.68) saturate(0.85); }
+  [data-theme='light'] & {
+    filter: brightness(0.68) saturate(0.85);
+  }
 }
 
 .gh-year__veil {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top,
-    rgba(5, 10, 10, 0.90) 0%,
-    rgba(5, 10, 10, 0.55) 55%,
-    rgba(5, 10, 10, 0.30) 100%
-  );
+      rgba(5, 10, 10, 0.90) 0%,
+      rgba(5, 10, 10, 0.55) 55%,
+      rgba(5, 10, 10, 0.30) 100%);
   pointer-events: none;
   transition: background 0.4s;
 
   [data-theme='light'] & {
     background: linear-gradient(to top,
-      rgba(6, 30, 28, 0.85) 0%,
-      rgba(6, 30, 28, 0.55) 55%,
-      rgba(6, 30, 28, 0.30) 100%
-    );
+        rgba(6, 30, 28, 0.85) 0%,
+        rgba(6, 30, 28, 0.55) 55%,
+        rgba(6, 30, 28, 0.30) 100%);
   }
 }
 
@@ -602,7 +683,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gh-year__bg { transition: none; }
+  .gh-year__bg {
+    transition: none;
+  }
 }
 
 // ──────────────────────────────────────────────
@@ -621,18 +704,27 @@
   padding: 4rem 2rem;
   animation: lbFade 0.25s ease both;
 
-  @include respond($bp-md) { padding: 5rem 0.5rem 2rem; }
+  @include respond($bp-md) {
+    padding: 5rem 0.5rem 2rem;
+  }
 }
 
 @keyframes lbFade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .lightbox__close {
   position: absolute;
-  top: 1.5rem; right: 1.5rem;
-  width: 44px; height: 44px;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -653,7 +745,8 @@
 }
 
 .lightbox__nav {
-  width: 56px; height: 56px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -674,17 +767,28 @@
   }
 
   @include respond($bp-md) {
-    width: 44px; height: 44px;
+    width: 44px;
+    height: 44px;
     font-size: 1.6rem;
   }
 }
 
-.lightbox__nav--prev { margin-right: 1.5rem; }
-.lightbox__nav--next { margin-left: 1.5rem; }
+.lightbox__nav--prev {
+  margin-right: 1.5rem;
+}
+
+.lightbox__nav--next {
+  margin-left: 1.5rem;
+}
 
 @include respond($bp-md) {
-  .lightbox__nav--prev { margin-right: 0.5rem; }
-  .lightbox__nav--next { margin-left: 0.5rem; }
+  .lightbox__nav--prev {
+    margin-right: 0.5rem;
+  }
+
+  .lightbox__nav--next {
+    margin-left: 0.5rem;
+  }
 }
 
 .lightbox__figure {
@@ -698,8 +802,15 @@
 }
 
 @keyframes lbZoom {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .lightbox__img {

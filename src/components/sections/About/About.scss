@@ -30,15 +30,19 @@
 
 .about__offset {
   position: absolute;
-  top: -1.5rem; left: -1.5rem;
-  width: 100%; height: 100%;
+  top: -1.5rem;
+  left: -1.5rem;
+  width: 100%;
+  height: 100%;
   border: 1px solid var(--border2);
   z-index: -1;
   transition: border-color 0.45s;
 
   background: #0b1515;
 
-  @include respond($bp-md) { display: none; }
+  @include respond($bp-md) {
+    display: none;
+  }
 }
 
 .about__frame {
@@ -49,8 +53,13 @@
   border: 1px solid var(--border);
   transition: background 0.45s, border-color 0.45s;
 
-  @include respond($bp-lg) { aspect-ratio: 16 / 9; }
-  @include respond($bp-md) { aspect-ratio: 4 / 3; }
+  @include respond($bp-lg) {
+    aspect-ratio: 16 / 9;
+  }
+
+  @include respond($bp-md) {
+    aspect-ratio: 4 / 3;
+  }
 }
 
 .about__frame-inner {
@@ -64,12 +73,12 @@
   gap: 1.2rem;
   transition: background 0.45s, filter 0.7s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 
-  background-image: url('../../../assets/images/About-Images/1.jpeg');
+  background-image: url('../../../assets/images/Hero-Images/4.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 
-  filter: grayscale(0.65) brightness(0.85) contrast(1.05);
+  // filter: grayscale(0.65) brightness(0.85) contrast(1.05);
 
   // Subtle cyan duotone overlay
   &::after {
@@ -89,7 +98,10 @@
 
 .about__corner {
   position: absolute;
-  top: 16px; left: 16px; right: 16px; bottom: 16px;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
   border: 3px solid var(--border2);
   pointer-events: none;
   transition: border-color 0.45s;
@@ -99,12 +111,36 @@
 
 .about__bracket {
   position: absolute;
-  width: 20px; height: 20px;
+  width: 20px;
+  height: 20px;
 
-  &--tl { top: -1px; left: -1px;  border-top: 2px solid var(--cyan); border-left:  2px solid var(--cyan); }
-  &--tr { top: -1px; right: -1px; border-top: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
-  &--bl { bottom: -1px; left: -1px;  border-bottom: 2px solid var(--cyan); border-left:  2px solid var(--cyan); }
-  &--br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
+  &--tl {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+  }
+
+  &--tr {
+    top: -1px;
+    right: -1px;
+    border-top: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+  }
+
+  &--bl {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+  }
+
+  &--br {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+  }
 }
 
 .about__deco {
@@ -131,7 +167,8 @@
 
 .about__badge {
   position: absolute;
-  bottom: -1.5rem; right: -1.5rem;
+  bottom: -1.5rem;
+  right: -1.5rem;
   background: var(--cyan);
   color: #060b0b;
   padding: 1.8rem;
@@ -140,7 +177,8 @@
   z-index: 12;
 
   @include respond($bp-md) {
-    bottom: -1rem; right: -1rem;
+    bottom: -1rem;
+    right: -1rem;
     padding: 1.2rem;
   }
 }
@@ -152,7 +190,9 @@
   line-height: 1;
   display: block;
 
-  @include respond($bp-md) { font-size: 2.5rem; }
+  @include respond($bp-md) {
+    font-size: 2.5rem;
+  }
 }
 
 .about__badge-label {
@@ -171,6 +211,15 @@
 .about__eyebrow {
   @include eyebrow;
   @include reveal-base;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
 }
 
 .about__title {
@@ -189,11 +238,21 @@
     color: var(--text);
     font-weight: 300;
     margin-bottom: 0.85rem;
+    text-align: justify;
 
-    &:first-of-type { font-size: 1.1rem; color: var(--heading); }
-    &:last-child { margin-bottom: 0; }
+    &:first-of-type {
+      font-size: 1.1rem;
+      color: var(--heading);
+    }
 
-    strong { color: var(--heading); font-weight: 500; }
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--heading);
+      font-weight: 500;
+    }
   }
 }
 
@@ -241,7 +300,8 @@
 }
 
 .about__value-icon {
-  width: 34px; height: 34px;
+  width: 34px;
+  height: 34px;
   flex-shrink: 0;
   border: 1px solid var(--border);
   display: flex;
@@ -253,7 +313,9 @@
 
   filter: drop-shadow(0 0 8px rgba(26, 216, 216, 0.45));
 
-  .about__value:hover & { background: var(--cyan-dim); }
+  .about__value:hover & {
+    background: var(--cyan-dim);
+  }
 }
 
 .about__value-title {
