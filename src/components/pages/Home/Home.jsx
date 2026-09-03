@@ -14,6 +14,8 @@ import Divider from '../../layout/Divider/Divider';
 import Contact from '../../sections/Contact/Contact';
 import PastorWelcome from '../../sections/PastorWelcome/PastorWelcome';
 
+import { usePageTheme } from '../../../hooks/usePageTheme';
+
 // ────────────────────────────────────────────────────────────────────
 // Home page composition.
 //
@@ -23,6 +25,9 @@ import PastorWelcome from '../../sections/PastorWelcome/PastorWelcome';
 // and Gallery. Use sparingly so they keep their meaning.
 // ────────────────────────────────────────────────────────────────────
 const Home = () => {
+
+  usePageTheme('home');
+
   return (
     <main id="main" tabIndex="-1">
       <Hero />

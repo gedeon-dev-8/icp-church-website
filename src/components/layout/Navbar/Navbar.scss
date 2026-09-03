@@ -135,6 +135,7 @@
   }
 
   // ── Page-specific colour overrides ──────────────────────────
+  body[data-page='home'] &,
   body[data-page='giving'] &,
   body[data-page='gallery'] &,
   body[data-page='departments'] &,
@@ -153,6 +154,7 @@
 
 // Scrolled override for gallery/departments — kept as a separate,
 // flat rule (NOT nested in .nav__link) so the ancestor order is correct.
+body[data-page='home'] .nav--scrolled .nav__link,
 body[data-page='giving'] .nav--scrolled .nav__link,
 body[data-page='gallery'] .nav--scrolled .nav__link,
 body[data-page='departments'] .nav--scrolled .nav__link,
@@ -191,6 +193,7 @@ body[data-page='history'] .nav--scrolled .nav__link {
   .nav__lang-opt {
     transition: color 0.25s;
 
+    body[data-page='home'] &,
     body[data-page='giving'] &,
     body[data-page='gallery'] &,
     body[data-page='departments'] &,
@@ -219,6 +222,7 @@ body[data-page='history'] .nav--scrolled .nav__link {
 
 // Scrolled override for gallery/departments — kept as a separate,
 // flat rule (NOT nested in .nav__link) so the ancestor order is correct.
+body[data-page='home'] .nav--scrolled .nav__link,
 body[data-page='giving'] .nav--scrolled .nav__lang-opt,
 body[data-page='gallery'] .nav--scrolled .nav__lang-opt,
 body[data-page='departments'] .nav--scrolled .nav__lang-opt,

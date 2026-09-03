@@ -776,7 +776,7 @@ const en = {
 const fr = {
 
   toolbar: {
-    tagline: "L'Église internationale de Pretoria",
+    tagline: "L'Église internationale de Pretoria | The International Church of Pretoria",
     tbService: 'Services du dimanche · 11 h 00',
   },
 
