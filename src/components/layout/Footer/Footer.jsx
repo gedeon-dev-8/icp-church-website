@@ -14,10 +14,10 @@ import {
 import './Footer.scss';
 
 const SOCIALS = [
-  { href: 'https://facebook.com/groups/263029040408370',           label: 'ICP on Facebook',  icon: faFacebookF },
-  { href: 'https://tiktok.com/@icp.content?_r=1&_t=ZS-95dvb3brPVa',label: 'ICP on TikTok',    icon: faTiktok    },
-  { href: 'https://youtube.com/channel/UCO5cyDDRu-jZA7oMKGqRIMg',  label: 'ICP on YouTube',   icon: faYoutube   },
-  { href: 'https://instagram.com/icp.content?igsh=MW5tcnFucnExdWF3eA==', label: 'ICP on Instagram', icon: faInstagram },
+  { href: 'https://www.facebook.com/profile.php?id=61566927647820',           label: 'ICP on Facebook',  icon: faFacebookF },
+  { href: 'https://www.tiktok.com/@international_church',label: 'ICP on TikTok',    icon: faTiktok    },
+  { href: 'https://www.youtube.com/@internationalchurchofpreto9',  label: 'ICP on YouTube',   icon: faYoutube   },
+  { href: 'https://www.instagram.com/international_church_of_pta', label: 'ICP on Instagram', icon: faInstagram },
 ];
 
 export default function Footer() {

@@ -330,7 +330,7 @@ export default function Contact() {
 
             <p className="form-note">
               {t('contact.notePrefix')}
-              <a href="mailto:icpeip012@gmail.com" className="form-note-link">
+              <a href="mailto:media.icpchurch@gmail.com" className="form-note-link">
                 {t('contact.noteEmail')}
               </a>
               {t('contact.notePostfix')}
