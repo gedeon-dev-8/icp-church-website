@@ -12,7 +12,7 @@ export default function Toolbar() {
         <div className="tb-socials">
           {/* Facebook */}
           <a
-            href="https://facebook.com/groups/263029040408370"
+            href="https://www.facebook.com/profile.php?id=61566927647820"
             target="_blank"
             rel="noopener"
             className="tb-social"
@@ -24,7 +24,7 @@ export default function Toolbar() {
           </a>
           {/* Instagram */}
           <a
-            href="https://instagram.com/icp.content"
+            href="https://www.instagram.com/international_church_of_pta/"
             target="_blank"
             rel="noopener"
             className="tb-social"
@@ -69,7 +69,7 @@ export default function Toolbar() {
           </a>
           {/* TikTok */}
           <a
-            href="https://tiktok.com/@icp.content"
+            href="https://www.tiktok.com/@international_church"
             target="_blank"
             rel="noopener"
             className="tb-social"
